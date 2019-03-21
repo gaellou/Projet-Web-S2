@@ -1,0 +1,20 @@
+id_musicien -> nom_musicien, prenom_musicien, date_naissance_musicien, date_inscription, code_postal_musicien, ville_musicien, id_instrument_musicien, id_genre_fav_musicien,
+
+id_genre -> nom_genre
+
+id_groupe -> nom_groupe, id_membre_musicien, id_genre_groupe, id_disque_groupe, id_concert, id_groupe_influence
+
+id_groupe, id_membre_musicien -> id_role_instrument_musicien, date_entree
+
+id_concert -> date_concert, id_salle, id_morceau_joue
+
+id_salle -> nom_salle, code_postal_salle, ville_salle, capacite_salle
+
+*id_disque -> nom_disque, date_sortie_disque, id_morceau_disque
+
+*id_morceau -> nom_morceau, id_genre_morceau, duree_morceau
+
+* : probablement pas le temps d'implémenter, voire pas la place.
+    Dans ce cas il faudra ajuster.
+
+On devrait sûrement créer une entité Ville, non ? Comme l'idée est présente à plusieurs endroits.

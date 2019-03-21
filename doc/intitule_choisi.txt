@@ -1,0 +1,7 @@
+base de musiciens :
+On doit connaître les infos usuelles (nom, prénom, année de naissance, ville)
+de plus : - quel(s) instrument(s) il pratique, depuis quelle année, 
+	  - (ses influences ?).
+	  - de quel projet (goupe) il fait partie, son ou (ses) rôle, et depuis quand.
+Pour chaque groupe, on a une discographie et des concerts.
+On veut finalement permettre aux musiciens de se rencontrer par affinitées.
