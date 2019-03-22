@@ -1,0 +1,3 @@
+La dépendance triple qui apparaît dans le MLD n'apparaîtra pas dans le MPD.
+On liera la table d'association << Pratique >> avec groupe, pour faire une autre table d'association.
+Ça évitera au passage d'avoir un rôle de guitariste dans le groupe sans savoir en jouer (vous avez déjà vu ça vous ?)
