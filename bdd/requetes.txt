@@ -1,0 +1,60 @@
+-- Salut, voilà des requêtes qu'on peut soumettre à la base de donnée pour se faire une idée de son contenu. On pourra ensuite s'en inspirer pendant le passage au PHP.
+
+
+	-- MUSICIEN --
+
+-- Afficher tous les musiciens (nom, prénom) et leur ville :
+SELECT nom_musicien, prenom_musicien, nom_ville 
+	FROM Musicien AS m
+	JOIN Ville AS v ON v.id = m.id_ville
+	ORDER BY nom_musicien, prenom_musicien
+
+-- Afficher tous les musiciens (nom, prénom) avec leurs instruments :
+SELECT nom_musicien, prenom_musicien, nom_instrument 
+	FROM Musicien AS m
+	JOIN Pratique AS p ON p.id_musicien = m.id
+	JOIN Instrument AS i ON i.id = p.id_instrument
+	ORDER BY nom_musicien, prenom_musicien
+
+-- Afficher tous les musiciens (nom, prénom) avec leurs goûts musicaux (genres) :
+SELECT nom_musicien, prenom_musicien, nom_genre
+	FROM Musicien AS m
+	JOIN Gout AS gt ON gt.id_musicien = m.id
+	JOIN Genre AS gn ON gn.id = gt.id_genre
+	ORDER BY nom_musicien, prenom_musicien
+
+
+	-- GROUPE --
+
+-- Afficher tous les groupes (nom, genre) :
+SELECT nom_groupe, nom_genre
+	FROM Groupe AS g
+	JOIN Genre AS gn ON gn.id = g.id_genre
+	ORDER BY nom_groupe
+
+-- Afficher tous les groupes (nom), et les membres (avec rôle) qui les composent :
+SELECT nom_groupe, nom_musicien, prenom_musicien, nom_instrument
+	FROM Groupe AS g
+	JOIN Membre AS mb ON mb.id_groupe = g.id
+	JOIN Pratique AS p ON p.id = mb.id_pratique
+	JOIN Musicien AS m ON m.id = p.id_musicien
+	JOIN Instrument AS i ON i.id = p.id_instrument
+	ORDER BY nom_groupe, nom_musicien, prenom_musicien
+
+	
+	-- SALLE --
+
+-- Afficher toutes les salles de concert (nom, capacité) et leur ville :
+SELECT nom_salle, nom_ville, capacite
+	FROM Salle AS s
+	JOIN Ville AS v ON v.id = s.id_ville
+	ORDER BY nom_salle, nom_ville
+
+	-- CONCERT --
+
+--Afficher tous les concerts (DATE), leur salle  et qui joue :
+SELECT date_concert, nom_salle, nom_groupe
+	FROM Concert AS c
+	JOIN Salle AS s ON s.id = c.id_salle
+	JOIN Groupe AS g ON g.id = c.id_groupe
+	ORDER BY date_concert, nom_salle
