@@ -1,0 +1,149 @@
+/* fonts import */
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700');
+body {
+    
+    font-family: 'Inconsolata', monospace;    
+}
+
+#ResearchMusician{
+	margin: auto;
+	width: 95%;
+	align-content: center;
+	background: grey;
+	display: grid;
+  	grid-template-columns: repeat(2, 5fr);
+  	grid-gap: 10px;
+  	grid-auto-rows: 100px;
+  	grid-template-areas: 
+   " z z " 
+    "a b "
+    "c d "
+    "e f "
+    "g h "
+    "i j "
+   
+    ;
+  	align-items: left;
+}
+.TxtSeach
+{
+	grid-area: z;
+}
+
+.TxtfstName
+{	
+	grid-area : a;
+}
+
+.search_firstname
+{
+	grid-area :b;
+}
+
+.TxtlstName
+{
+	grid-area :c ;
+}
+
+.search_lastname
+{
+	grid-area : d;
+}
+
+.TxtGenre
+{
+	grid-area :e;
+}
+
+.search_genre[]
+{
+	grid-area : f;
+}
+
+.TxtLoca
+{
+	grid-area :g;
+}
+
+.search_town
+{
+	grid-area :h;
+}
+
+.TxtInstru
+{
+	grid-area :i;
+}
+
+.search_instruments[]
+{
+	grid-area :j;
+}
+
+
+.textForm
+{
+	margin-left: 5px;
+}
+
+
+
+.TextInput
+{
+	top: 25%; left: 1%;
+} 
+
+#button-search 
+{	
+	padding-top: 50px;
+	text-align: center;
+	border-radius: 5px;
+	padding: 15px 25px;
+	font-size: 22px;
+	text-decoration: none;
+	margin: 20px;
+	color: #fff;
+	position: relative;
+	display: inline-block;
+	background-color: #e74c3c;
+	box-shadow: 0px 5px 0px 0px #CE3323;
+}
+
+.btn:active {
+  	transform: translate(0px, 5px);
+  	-webkit-transform: translate(0px, 5px);
+  	box-shadow: 0px 1px 0px 0px;
+}
+
+
+button:hover 
+{
+  	background-color: #FF6656;
+}
+
+
+input 
+{	
+	width: 60%;
+	height: 50px;
+	position: relative;
+	outline: none;
+	border:2px solid #ddd;
+  	padding-left: 10px;
+	border-radius: 10px;
+	font-size: 16px;
+	font-family: sans-serif,Arial;
+	color: gray;
+}
+
+.textForm
+{
+	margin : auto;
+}
+
+
+
+.TextInput
+{
+	top: 25%; left: 1%;
+} 

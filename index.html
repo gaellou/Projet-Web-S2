@@ -1,42 +1,34 @@
 <!doctype html>
 <html>
+<link href="style.css" rel="stylesheet"/>
 <body>
 <h1> Recherche de musicien </h1>
-<div id='InfoMusician'>
-	<div id='MusName'> </div>
-	<div id= 'DateMus'> </div>
-	<div id = "Location"> Localisation : </div>
-	<div id = "Genres"> Genre : </div>
-	<div id='Instrument' > Instruments : </div>
-	<div id = "Projects"> Groupes et projet : </div>
 
+
+<div id = 'ResearchMusician'> <h2 id:'TxtSearch'> Recherche : </h2>
+<div></div>
+	<label id = 'TxtfstName' for="name" class="textForm">Prénom :</label>
+		<input type="text" id='search_firstname' class='TextInput' >
+	
+	<label id='TxtlstName"' for="name" class="textForm">Nom :</label>
+		<input type="text" id="search_lastname" class='TextInput'  >
+
+	<label id='TxtGenre' for="name" class="textForm">Genre :</label>
+
+		<input type="text" id="search_genre[]" class='TextInput'  >
+	
+	<label id ='TxtLoca' for="name" class="textForm">Localisation :</label>
+
+			<input type="text" id="search_town" class='TextInput'  >
+
+	<label id='TxtInstru' for="name" class="textForm">Instrument :</label>
+
+		<input type="text" id="search_instruments[]"  class='TextInput' >
+
+	<button id="button-search">Search</button>
 </div>
 
-<div id = 'ResearchMusician'> <h2> Recherche : </h2>
-	<label for="name">Prénom :</label>
-
-		<input type="text" id="SearchFirstname" >
-<div> </div>	
-	<label for="name">Nom :</label>
-
-		<input type="text" id="SearchLastname" >
-<div> </div>
-	<label for="name">Genre :</label>
-
-		<input type="text" id="SearchGenre" >
-<div> </div>	
-	<label for="name">Localisation :</label>
-
-			<input type="text" id="SearchLoca" >
-<div> </div>
-	<label for="name">Instrument :</label>
-
-		<input type="text" id="SearchInstru" >
-<div> </div>
-	<button>Search</button>
-</div>
-
-<div id='SearchResult'> <h2>Résultats : </h2> </div>
+<div id='res_div'> <h2>Résultats : </h2> </div>
 
 
 </body>
