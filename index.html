@@ -2,41 +2,39 @@
 <html>
 <body>
 <h1> Recherche de musicien </h1>
-<div id='InfoMusician'>
-	<div id='MusName'> </div>
-	<div id= 'DateMus'> </div>
-	<div id = "Location"> Localisation : </div>
-	<div id = "Genres"> Genre : </div>
-	<div id='Instrument' > Instruments : </div>
-	<div id = "Projects"> Groupes et projet : </div>
 
+<div id = 'search_div'> 
+	<h2> Recherche : </h2>
+	
+	<div>
+		<label for="name">Prénom :</label>
+		<input type="text" id="search_firstname" >
+	</div>	
+	
+	<div> 
+		<label for="name">Nom :</label>
+		<input type="text" id="search_lastname" >
+	</div>
+	
+	<div> 
+		<label for="name">Genres :</label>
+		<input type="text" id="search_genres[]" >
+	</div>	
+	<div> 
+		<label for="name">Ville :</label>
+		<input type="text" id="search_town" >
+	</div>
+
+	<div> 
+		<label for="name">Instrument :</label>
+		<input type="text" id="search_instruments[]" >
+	</div>
+	<button id="button-search">Recherche</button>
 </div>
 
-<div id = 'ResearchMusician'> <h2> Recherche : </h2>
-	<label for="name">Prénom :</label>
-
-		<input type="text" id="SearchFirstname" >
-<div> </div>	
-	<label for="name">Nom :</label>
-
-		<input type="text" id="SearchLastname" >
-<div> </div>
-	<label for="name">Genre :</label>
-
-		<input type="text" id="SearchGenre" >
-<div> </div>	
-	<label for="name">Localisation :</label>
-
-			<input type="text" id="SearchLoca" >
-<div> </div>
-	<label for="name">Instrument :</label>
-
-		<input type="text" id="SearchInstru" >
-<div> </div>
-	<button>Search</button>
+<div id='res_div'> 
+	<h2>Résultats : </h2> 
 </div>
-
-<div id='SearchResult'> <h2>Résultats : </h2> </div>
 
 
 </body>

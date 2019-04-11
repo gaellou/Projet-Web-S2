@@ -18,7 +18,7 @@ if( !isset($_GET["id"]) || !checkID(intval($_GET["id"]), 'id', 'Musicien') )
 	$message = array( "message" => "Identifiant incorrect ou absent." );
 	echo json_encode($message);
 
-	header(http_response_code(404));
+	header(http_response_code(405));
 	exit();
 }
 
