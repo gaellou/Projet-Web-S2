@@ -2,33 +2,38 @@
 <html>
 <link href="style.css" rel="stylesheet"/>
 <body>
-<h1> Trouve des musiciens ! </h1>
+	<h1> Trouve des musiciens ! </h1>
 
+	<div id='button_SignIn'>
+		<a href='Inscription.html'><button id="button-subscribe"> Je me propose !</button></a>
+	</div>
 
-<div id = 'ResearchMusician'> <h2 id:'TxtSearch'> Recherche : </h2>
-<div></div>
-	<label id = 'TxtfstName' for="name" class="textForm">Prénom :</label>
-		<input type="text" id='search_firstname' class='TextInput' >
+	<div id = 'ResearchMusician'> <h2 id:'TxtSearch'> Recherche : </h2>
+	<div></div>
+		<label id = 'TxtfstName' for="name" class="textForm">Prénom :</label>
+			<input type="text" id='search_firstname' class='TextInput' >
 	
-	<label id='TxtlstName"' for="name" class="textForm">Nom :</label>
-		<input type="text" id="search_lastname" class='TextInput'  >
+		<label id='TxtlstName"' for="name" class="textForm">Nom :</label>
+			<input type="text" id="search_lastname" class='TextInput'  >
 
-	<label id='TxtGenre' for="name" class="textForm">Genre :</label>
+		<label id='TxtGenre' for="name" class="textForm">Genre :</label>
 
-		<input type="text" id="search_genre[]" class='TextInput'  >
+			<input type="text" id="search_genre[]" class='TextInput'  >
 	
-	<label id ='TxtLoca' for="name" class="textForm">Localisation :</label>
+		<label id ='TxtLoca' for="name" class="textForm">Localisation :</label>
 
-			<input type="text" id="search_town" class='TextInput'  >
+				<input type="text" id="search_town" class='TextInput'  >
 
-	<label id='TxtInstru' for="name" class="textForm">Instrument :</label>
+		<label id='TxtInstru' for="name" class="textForm">Instrument :</label>
 
-		<input type="text" id="search_instruments[]"  class='TextInput' >
+			<input type="text" id="search_instruments[]"  class='TextInput' >
 
-	<button id="button-search">Search</button>
-</div>
+		<button id="button-search">Search</button>
+	</div>
 
-<div id='res_div'> <h2>Résultats : </h2> </div>
+
+
+	<div id='res_div'> <h2>Résultats : </h2> </div>
 
 
 </body>

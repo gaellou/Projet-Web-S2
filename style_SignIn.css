@@ -1,23 +1,15 @@
-/* fonts import */
 @import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700');
 body {
     align-content: center;
     
     font-family: 'Inconsolata', monospace;    
-     background: url(img/fond_index_haut.png) no-repeat top center;
-	 background-size: 100em;
 }
-h1{
+h1
+{
 	text-align: center;
-	text-shadow: -1px 0 black, 0 1px white;
-	
-	 font-size: 7em;
-	 margin-bottom: 20px;
-	 border-radius: 20px;
-
 }
 
-#ResearchMusician{
+#SignInForm{
 	margin-top: 40px;
 	margin-left: auto;
 	margin-right: auto;
@@ -25,24 +17,39 @@ h1{
 	align-content: center;
 	background: grey;
 	display: grid;
-  	grid-template-columns: repeat(2, 5fr);
+  	grid-template-columns: repeat(4, 2fr);
   	grid-gap: 10px;
   	grid-auto-rows: 100px;
   	grid-template-areas: 
-   " z z " 
-    "a b "
-    "c d "
-    "e f "
-    "g h "
-    "i j "
-   "P P"
+   	"S S S S"
+    "a b c d "  
+    "z y g h" 
+    "e f i j" 
+    "P P P P"
+   
     ;
   	align-items: left;
   	border-radius: 25px;
 }
-#TxtSeach
+
+input 
+{	
+	width: 60%;
+	height: 50px;
+	position: relative;
+	outline: none;
+	border:2px solid #ddd;
+  	padding-left: 10px;
+	border-radius: 10px;
+	font-size: 16px;
+	font-family: sans-serif,Arial;
+	color: gray;
+}
+
+
+#txtSignIn
 {
-		grid-area: z;
+		grid-area: S;
 }
 
 #TxtfstName
@@ -50,7 +57,7 @@ h1{
 	grid-area : a;
 }
 
-#search_firstname
+#SignIn_firstname
 {
 	grid-area :b;
 }
@@ -60,9 +67,18 @@ h1{
 	grid-area :c ;
 }
 
-#search_lastname
+#SignIn_lastname
 {
 	grid-area : d;
+}
+#TxtDate
+{
+	grid-area: z
+}
+
+#SigIn_date
+{
+	grid-area: : y;
 }
 
 #TxtGenre
@@ -70,7 +86,7 @@ h1{
 	grid-area :e;
 }
 
-#search_genre[]
+#SignIn_genre[]
 {
 	grid-area : f;
 }
@@ -80,7 +96,7 @@ h1{
 	grid-area :g;
 }
 
-#search_town
+#SignIn_town
 {
 	grid-area :h;
 }
@@ -90,11 +106,10 @@ h1{
 	grid-area :i;
 }
 
-#search_instruments[]
+#SignIn_instruments[]
 {
 	grid-area :j;
 }
-
 
 #textForm
 {
@@ -108,31 +123,9 @@ h1{
 	top: 25%; left: 1%;
 } 
 
-a
+#button-signIn 
 {	
-	color : white;
-}
-
-#button-subscribe
-{	width: 100%;
-	margin : auto;
-	padding-top: 50px;
-	text-align: center;
-	border-radius: 5px;
-	padding: 15px 25px;
-	font-size: 22px;
-	text-decoration: none;
-	margin-bottom: : 15px;
-	color: #fff;
-	position: relative;
-	display: inline-block;
-	background-color: #B30F0F;
-	box-shadow: 0px 5px 0px 0px #CE3323;
-}
-
-#button-search 
-{	
-	grid-area: P;
+	grid-area:  P ;
 	padding-top: 50px;
 	text-align: center;
 	border-radius: 5px;
@@ -158,30 +151,3 @@ button:hover
 {
   	background-color: #FF6656;
 }
-
-
-input 
-{	
-	width: 60%;
-	height: 50px;
-	position: relative;
-	outline: none;
-	border:2px solid #ddd;
-  	padding-left: 10px;
-	border-radius: 10px;
-	font-size: 16px;
-	font-family: sans-serif,Arial;
-	color: gray;
-}
-
-.textForm
-{
-	margin : auto;
-}
-
-
-
-.TextInput
-{
-	top: 25%; left: 1%;
-} 
