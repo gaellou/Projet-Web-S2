@@ -1,50 +1,86 @@
 <?php
 
 
-function isElement($element, $vecteur, $champ)
+function checkPost($musicien, $ville, $genres, $instruments, $conn)
 {
-	foreach( $vecteur as $valeur )
-	{
-		if( $valeur[$champ] === $element )
-			return true;
-	}
-	return false;
+	$valide = checkMusician_CREATE($musicien, $conn);
+	$valide = $valide & checkTown($ville, $conn);
+	if( isset($genres) )
+		$valide = $valide & checkGenres($genres, $conn);
+	if( isset($instruments) )
+		$valide = $valide & checkInstruments($instruments, $conn);
+	return $valide;
 }
 
-function castArrayInt($arr)
+function checkPut($musicien, $ville, $genres, $instruments, $conn)
 {
-	foreach($arr as $index => $string)
-	{
-		$arr[$index] = intval($string);
-	}
-	return $arr;
+	$valide = checkMusician_UPDATE($musicien, $conn);
+	var_dump($valide);
+	if( isset($ville) )
+		$valide = $valide & checkTown($ville, $conn);
+	var_dump($valide);
+	if( isset($genres) )
+		$valide = $valide & checkGenres_UPDATE($genres, $conn);
+	var_dump($valide);
+	if( isset($instruments) )
+		$valide = $valide & checkInstruments_UPDATE($instruments, $conn);
+	return $valide;
 }
 
-function checkPost($musicien, $genres, $instruments)
+function checkSearch($musicien, $dates, $ville, $genres, $instruments, $conn)
 {
-	$check = checkMusician($musicien);
-	$check = $check & checkInstruments($instruments);
-	$check = $check & checkPlay($instruments);
-	$check = $check & checkGenres($genres);
-	return $check;
+	$valide = checkMusician_UPDATE($musicien, $conn);
+	if( isset($ville) )
+		$valide = $valide & checkTown($ville, $conn);
+	if( isset($genres) )
+		$valide = $valide & checkGenres_UPDATE($genres, $conn);
+	if( isset($instruments) )
+		$valide = $valide & checkInstruments_SEARCH($instruments, $conn);
+	if( isset($dates['apres']) )
+		$valide = $valide & ( strtotime($dates['apres']) !== false );
+	if( isset($dates['avant']) )
+		$valide = $valide & ( strtotime($dates['avant']) !== false );
+	return $valide;
 }
 
-function checkMusician($musicien)
+function checkMusician_CREATE($musicien, $conn)
 {
-	$check = checkID($musicien['id'], 'id', 'Musicien');
-	$check = $check & is_string($musicien['nom']);
-	$check = $check & is_string($musicien['prenom']);
-	$check = $check & strtotime($musicien['date_naissance']);
-	return($check);
+	$valide = is_string($musicien['nom']);
+	$valide = $valide & is_string($musicien['prenom']);
+	$valide = $valide & (strtotime($musicien['date_naissance']) !== false );
+	return $valide;
+}
+
+function checkMusician_UPDATE($musicien, $conn)
+{
+	$valide = true;
+	if( isset($musicien['nom']) )
+		$valide = $valide & is_string($musicien['nom']);
+	if( isset($musicien['prenom']) )
+		$valide = $valide & is_string($musicien['prenom']);
+	if( isset($musicien['date_naissance']) )
+		$valide = $valide & (strtotime($musicien['date_naissance']) !== false );
+	return $valide;
+}
+
+function checkMusician($musicien, $conn)
+{
+	require_once '../data/commun.php';
+	$valide = checkID($musicien['id'], 'id', 'Musicien', $conn);
+	$valide = $valide & is_string($musicien['nom']);
+	$valide = $valide & is_string($musicien['prenom']);
+	$valide = $valide & strtotime($musicien['date_naissance']);
+	return $valide;
 }
 
 
 
-function checkGenres($genres)
+function checkGenres($genres, $conn)
 {
+	require_once '../data/commun.php';
 	foreach( $genres as $genre )
 	{
-		if( !is_int($genre['id']) || !checkID($idGenre['id'],'id','Genre') )
+		if( !is_int($genre['id']) || !checkID($genre['id'],'id','Genre', $conn) )
 		{
 			return false;
 		}
@@ -52,55 +88,67 @@ function checkGenres($genres)
 	return true;
 }
 
-function checkPlay($instruments)
+function checkInstruments($instruments, $conn)
 {
+	require_once '../data/commun.php';
 	foreach( $instruments as $instrument )
 	{
-		if( !strtotime($instrument['annee_debut']) )
+		if( !is_int($instrument['id']) ||
+			!strtotime($instrument['annee_debut']) ||
+			!checkID($instrument['id'],'id','Instrument', $conn) )
+			return false;
+	}
+	return true;
+}
+
+function checkGenres_UPDATE($genres, $conn)
+{
+	require_once '../data/commun.php';
+	foreach( $genres as $genre )
+	{
+		if( $genre['id'] === -1)
+			return true;
+		else if( !is_int($genre['id']) || !checkID($genre['id'], 'id', 'Genre', $conn) )
 			return false;
 	}
 	return true;
 }
 
 
-function checkInstruments($instruments)
+function checkInstruments_UPDATE($instruments, $conn)
 {
+	require_once '../data/commun.php';
 	foreach( $instruments as $instrument )
 	{
-		if( !is_int($instrument['id']) || !checkID($instrument['id'],'id','Instrument') )
+		if( $instrument['id'] === -1)
+			return true;
+		if( !is_int($instrument['id']) ||
+			!strtotime($instrument['annee_debut']) ||
+			!checkID($instrument['id'],'id','Instrument', $conn) )
 			return false;
 	}
 	return true;
 }
 
-function checkTown($town)
+function checkInstruments_SEARCH($instruments, $conn)
 {
-	return( is_int($town['id']) && checkID($town['id'],'id','Ville') );
+	require_once '../data/commun.php';
+	foreach( $instruments as $instrument )
+	{
+		if( $instrument['id'] === -1)
+			return true;
+		if( !is_int($instrument['id']) ||
+			!checkID($instrument['id'],'id','Instrument', $conn) )
+			return false;
+	}
+	return true;
 }
 
-
-
-function checkID($value, $field, $table)
+function checkTown($ville, $conn)
 {
-	include_once "../data/MyPDO.musiciens-groupes.include.php";
-
-	if( is_string($value) )
-		$value = "'".$value."'"; //pour correspondre à la syntaxe sql
-
-	$req_text = <<<SQL
-	SELECT {$field} FROM {$table}
-		WHERE {$field} = {$value}
-SQL;
-
-	$req_ID = MyPDO::getInstance()->prepare($req_text);
-	$req_ID->execute();
-
-	$resp = $req_ID->fetch();
-
-	if( $resp === false )
-		return false;
-	else
-		return true;
+	require_once '../data/commun.php';
+	$valide = is_int($ville['id']) & checkID($ville['id'],'id','Ville', $conn);
+	return $valide;
 }
 
 ?>

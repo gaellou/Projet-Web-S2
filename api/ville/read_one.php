@@ -17,7 +17,7 @@ require_once '../data/MyPDO.musiciens-groupes.include.php';
 $conn = MyPDO::getInstance();
 
 require_once '../data/commun.php';
-if( !isset($_GET["id"]) || !checkID(intval($_GET["id"]), 'id', 'Musicien', $conn) )
+if( !isset($_GET["id"]) || !checkID(intval($_GET["id"]), 'id', 'Ville', $conn) )
 {
 	$message = array( "message" => "Identifiant incorrect ou absent." );
 	echo json_encode($message);
@@ -30,12 +30,12 @@ if( !isset($_GET["id"]) || !checkID(intval($_GET["id"]), 'id', 'Musicien', $conn
 require_once "function.php";
 
 $id = intval($_GET["id"]);
-$resultat = selectMusician($id, $conn);
+$resultat = selectTown($id, $conn);
 
 
 if( !$resultat )
 {
-	$message = array( "message" => "Erreur, musicien à l'id {$id} non trouvé (n'est pas censé se produire)." );
+	$message = array( "message" => "Erreur, ville à l'id {$id} non trouvée (n'est pas censé se produire)." );
 	echo json_encode($message);
 
 	header(http_response_code(406));

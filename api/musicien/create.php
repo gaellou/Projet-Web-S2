@@ -1,5 +1,12 @@
 <?php
 
+/*Crée un musicien à partir de :
+* - son nom, prénom, sa date de naissance  et l'id de sa ville,
+* - facultativement des id des intstruments (avec année de début)
+* et genres favoris.
+*/
+
+
 header("Content-Type: application/json; charset=UTF-8");
 
 $method = strtolower($_SERVER["REQUEST_METHOD"]);
@@ -10,85 +17,84 @@ if( $method !== "post"  || !isset($_POST) )
 	exit();
 }
 
+/** RÉCUP INFOS CLIENT **/
+
 require_once 'check.php';
+require_once '../data/commun.php';
 
 //
 $musicien = array();
-$musicien['nom'] = $_POST['nom'];
-$musicien['prenom'] = $_POST['prenom'];
-$musicien['date_naissance'] = $_POST['date_naissance'];
-$idVille = intval($_POST['ville']);
+$musicien['nom'] = isset($_POST['nom']) ? $_POST['nom'] : NULL;
+$musicien['prenom'] = isset($_POST['prenom']) ? $_POST['prenom'] : NULL;
+$musicien['date_naissance'] = isset($_POST['date_naissance']) ? $_POST['date_naissance'] : NULL;
+//
+if( isset($_POST['ville']) )
+	$ville['id'] = intval($_POST['ville']);
+else
+	$ville = NULL;
 //
 
-//
-$genres = castArrayInt( explode(',',$_POST['genres']) );
-//
 
-//
-$instruments = array();
-$idInstruments = castArrayInt( explode(',',$_POST['instruments']) );
-$annee_debut = explode(',', $_POST['annee_debut']);
-foreach( $idInstruments as $index => $idInstrument )
+if( isset($_POST['genres']) )
 {
-	$instruments[$index]['id'] = $idInstrument;
-	$instruments[$index]['annee_debut'] = $annee_debut[$index];
+	$idGenres = isset($_POST['genres']) ? castArrayInt( explode(',',$_POST['genres']) ) : NULL;
+	$genres = array();
+	foreach ($idGenres as $indice => $idGenre) 
+	{
+		$genres[$indice]['id'] = $idGenre;
+	}
+	unset($idGenres);
 }
-unset($idInstruments);
-unset($annee_debut);
+else
+	$genres = NULL;
+
 //
+if( isset($_POST['instruments']) && isset($_POST['annee_debut']) )
+{
+	$instruments = array();
+	$idInstruments = castArrayInt( explode(',',$_POST['instruments']) );
+	$annee_debut = explode(',', $_POST['annee_debut']);
+	foreach( $idInstruments as $indice => $idInstrument )
+	{
+		$instruments[$indice]['id'] = $idInstrument;
+		$instruments[$indice]['annee_debut'] = $annee_debut[$indice];
+	}
+	unset($idInstruments);
+	unset($annee_debut);
+}
+else
+{
+	$instruments = NULL;
+}
+//
+/** FIN RÉCUP CLIENT **/
 
 require_once "../data/MyPDO.musiciens-groupes.include.php";
 
 $conn = MyPDO::getInstance();
 
-$req_Musicien_text = <<<SQL
-	INSERT INTO `Musicien` (`id`, `nom_musicien`, `prenom_musicien`, `date_naissance`, `id_ville`)
-		VALUES ( NULL, "{$musicien['nom']}", "{$musicien['prenom']}", "{$musicien['date_naissance']}", {$idVille} )
-SQL;
-
-$req_Musicien = $conn->prepare($req_Musicien_text);
-
-$req_Musicien->execute();
-//On récupère l'identifiant
-$id  = intval( $conn->lastInsertId() );
-
-//On prépare les autres requêtes
-$req_Aime = $conn->prepare(<<<SQL
-	INSERT INTO `Aime` (`id_musicien`, `id_genre`)
-		VALUES ({$id}, ?)
-SQL
-);
-
-$req_Pratique = $conn->prepare(<<<SQL
-	INSERT INTO `Pratique` (`id_musicien`, `id_instrument`, `annee_debut`)
-		VALUES ({$id}, :id, :annee_debut)
-SQL
-);
-
-//On les exécutent, pour tous les éléments des vecteurs
-foreach ($genres as $idGenre) 
-{
-	$req_Aime->bindValue(1, $idGenre);
-	$req_Aime->execute();
-}
-foreach ($instruments as $instrument) 
-{
-	$req_Pratique->execute( array( ':id' => $instrument['id'], 
-						':annee_debut'=> $instrument['annee_debut']) );
-}
+/** VÉRIFICATIONS **/
 
 
-if( !checkPost($musicien, $genres, $instruments) ) 
+
+if( !checkPost($musicien, $ville, $genres, $instruments, $conn) ) 
 {
 	$message = array( "message" => "Arguments incorrects ou absents." );
 	echo json_encode($message);
-	header(http_response_code(405));
+	header(http_response_code(406));
 	exit();
 }
 
-$musicien['id'] = $id;
+/** REQUÊTE BDD **/
+require_once "../data/MyPDO.musiciens-groupes.include.php";
+require_once 'function.php';
 
-echo json_incode($musicien);
+$reponse = createMusician($musicien, $ville, $instruments, $genres, $conn);
+
+
+/** FIN TRAITEMENT **/
+
+echo json_encode($reponse);
 header( http_response_code(200) );
 
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Jeu 11 Avril 2019 à 13:46
+-- Généré le :  Sam 23 Mars 2019 à 11:34
 -- Version du serveur :  5.7.25-0ubuntu0.18.10.2
 -- Version de PHP :  7.2.15-0ubuntu0.18.10.1
 
@@ -69,6 +69,32 @@ INSERT INTO `Genre` (`id`, `nom_genre`) VALUES
 (8, 'Humour'),
 (9, 'Chorale'),
 (10, 'Classique');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Gout`
+--
+
+CREATE TABLE `Gout` (
+  `id_musicien` int(11) NOT NULL,
+  `id_genre` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `Gout`
+--
+
+INSERT INTO `Gout` (`id_musicien`, `id_genre`) VALUES
+(1, 2),
+(2, 2),
+(2, 4),
+(3, 4),
+(3, 10),
+(4, 3),
+(4, 8),
+(5, 7),
+(5, 9);
 
 -- --------------------------------------------------------
 
@@ -166,18 +192,11 @@ CREATE TABLE `Musicien` (
 
 INSERT INTO `Musicien` (`id`, `nom_musicien`, `prenom_musicien`, `date_naissance`, `id_ville`, `date_inscripton`) VALUES
 (1, 'Brami', 'Ruben', '1998-05-04', 1, '2019-03-23 09:48:51'),
-(2, 'Labendzki', 'Pierre', '1998-09-13', 1, '2019-03-23 09:48:51'),
+(2, 'Labendzky', 'Pierre', '1998-09-13', 1, '2019-03-23 09:48:51'),
 (3, 'Vallet', 'Gaëlle', '1998-07-20', 2, '2019-03-23 09:48:51'),
 (4, 'Cherrier', 'Sylvain', '1966-06-06', 1, '2019-03-23 09:48:51'),
 (5, 'Chevreuil', 'Antoine', '1960-02-02', 1, '2019-03-23 09:48:51'),
-(6, 'Thiel', 'Pierre', '1997-04-01', 4, '2019-03-23 09:48:51'),
-(7, 'Bouchuncoin', 'Satan', '0666-06-06', 2, '2019-04-10 20:26:37'),
-(8, 'Bouchuncoin', 'Satan', '0666-06-06', 2, '2019-04-10 20:29:34'),
-(9, 'Bouchuncoin', 'Satan', '0666-06-06', 2, '2019-04-10 20:31:01'),
-(10, 'Bouchuncoin', 'Satan', '0666-06-06', 2, '2019-04-10 20:33:47'),
-(11, 'Bouchuncoin', 'Satan', '0666-06-06', 2, '2019-04-10 20:36:14'),
-(12, 'Bouchuncoin', 'Satan', '0666-06-06', 2, '2019-04-10 20:36:52'),
-(13, 'Bouchuncoin', 'Satan', '0666-06-06', 2, '2019-04-10 20:37:18');
+(6, 'Thiel', 'Pierre', '1997-04-01', 4, '2019-03-23 09:48:51');
 
 -- --------------------------------------------------------
 
@@ -204,9 +223,7 @@ INSERT INTO `Pratique` (`id`, `id_musicien`, `id_instrument`, `annee_debut`) VAL
 (6, 3, 3, 2003),
 (7, 3, 8, 2019),
 (8, 1, 7, 2016),
-(9, 5, 1, 1990),
-(10, 13, 3, 0000),
-(11, 13, 6, 1999);
+(9, 5, 1, 1990);
 
 -- --------------------------------------------------------
 
@@ -281,6 +298,12 @@ ALTER TABLE `Genre`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `Gout`
+--
+ALTER TABLE `Gout`
+  ADD PRIMARY KEY (`id_musicien`,`id_genre`);
+
+--
 -- Index pour la table `Groupe`
 --
 ALTER TABLE `Groupe`
@@ -336,7 +359,7 @@ ALTER TABLE `Concert`
 -- AUTO_INCREMENT pour la table `Genre`
 --
 ALTER TABLE `Genre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT pour la table `Groupe`
 --
@@ -346,17 +369,17 @@ ALTER TABLE `Groupe`
 -- AUTO_INCREMENT pour la table `Instrument`
 --
 ALTER TABLE `Instrument`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT pour la table `Musicien`
 --
 ALTER TABLE `Musicien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT pour la table `Pratique`
 --
 ALTER TABLE `Pratique`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Rajouté par rapport au MLD, pour lier à Membre et éviter l''association triple.', AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Rajouté par rapport au MLD, pour lier à Membre et éviter l''association triple.', AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT pour la table `Salle`
 --
@@ -366,7 +389,7 @@ ALTER TABLE `Salle`
 -- AUTO_INCREMENT pour la table `Ville`
 --
 ALTER TABLE `Ville`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
