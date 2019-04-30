@@ -17,7 +17,7 @@ function checkPut($concert, $groupe, $salle, $conn)
 	if( isset($salle) )
 		$valide = $valide & checkVenue($salle, $conn);
 	return $valide;
-}
+ }
 function checkGig($concert)
 {
 	$valide = (strtotime($concert['date_concert']) !== false );
