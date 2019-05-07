@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<link href="css/styleMus.css" rel="stylesheet"/>
+<body>
+	<h1> Trouve des musiciens ! </h1>
+	
+	<div></div>
+	<div id = 'ResearchMusician'> <h2 id:'TxtSearch'> Recherche : </h2>	<div>
+		
+		<label id = 'TxtfstName' for="name" class="textForm">Prénom :</label>
+			<input type="text" id='search_firstname' class='TextInput' >
+	
+		<label id='TxtlstName"' for="name" class="textForm">Nom :</label>
+			<input type="text" id="search_lastname" class='TextInput'  >
+
+		<label id='TxtGenre' for="name" class="textForm">Genre :</label>
+
+			<input type="text" id="search_genre[]" class='TextInput'  >
+	
+
+		<label id='TxtInstru' for="name" class="textForm">Instrument :</label>
+
+			<input type="text" id="search_instruments[]"  class='TextInput' >
+
+		<button id="button-search">Search</button>
+
+	</div></div>
+
+		<div id='res_div'> <h2>Résultats : </h2> </div>
+	</body>
