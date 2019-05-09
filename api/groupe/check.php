@@ -4,9 +4,9 @@
 function checkPost($groupe, $genre, $membres, $conn)
 {
 	$valide = checkBand_CREATE($groupe, $conn);
-	$valide = $valide & checkGenre($genre, $conn);
+	$valide &= checkGenre($genre, $conn);
 	if( isset($membres) )
-		$valide = $valide & checkMembres($membres, $conn);
+		$valide &= checkMembres($membres, $conn);
 	return $valide;
 }
 
@@ -14,9 +14,9 @@ function checkPut($groupe, $genre, $membres, $conn)
 {
 	$valide = checkBand_UPDATE($groupe, $conn);
 	if( isset($genre) )
-		$valide = $valide & checkGenre($genre, $conn);
+		$valide &= checkGenre($genre, $conn);
 	if( isset($membres) )
-		$valide = $valide & checkMembres_UPDATE($membres, $conn);
+		$valide &= checkMembres_UPDATE($membres, $conn);
 	return $valide;
 }
 
@@ -25,11 +25,11 @@ function checkSearch($groupe, $genre, $musiciens, $instruments, $conn)
 {
 	$valide = checkBand_UPDATE($groupe, $conn);
 	if( isset($genre) )
-		$valide = $valide & checkGenre($genre, $conn);
+		$valide &= checkGenre($genre, $conn);
 	if( isset($musiciens) )
-		$valide = $valide & checkMusicians($musiciens, $conn);
+		$valide &= checkMusicians($musiciens, $conn);
 	if( isset($instruments) )
-		$valide = $valide & checkInstruments($instruments, $conn);
+		$valide &= checkInstruments($instruments, $conn);
 	return $valide;
 }
 
@@ -45,7 +45,7 @@ function checkBand_UPDATE($groupe, $conn)
 {
 	$valide = true;
 	if( isset($groupe['nom']) )
-		$valide = $valide & is_string($groupe['nom']);
+		$valide &= is_string($groupe['nom']);
 	return $valide;
 }
 

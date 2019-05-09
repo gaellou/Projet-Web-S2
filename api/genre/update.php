@@ -1,7 +1,6 @@
 <?php
 
-/*Crée un genre à partir de :
-* - son nom
+/*Mets à jour un le nom d'un genre à partir de son id.
 */
 
 

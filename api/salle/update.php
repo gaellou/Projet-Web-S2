@@ -1,6 +1,6 @@
 <?php
 
-/*Crée un salle  à partir de :
+/*Mets à jour une salle  à partir de son id :
 * - son nom, sa capacité, l'id de sa ville
 */
 

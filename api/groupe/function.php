@@ -289,7 +289,7 @@ function searchBand($groupe, $genre, $musiciens, $instruments, $conn)
 	if( isset($genre) )
 	{
 		$req_Genre_texte = " AND `id_genre` = {$genre['id']}";
-		$req_Genre_WHERE = $req_Groupe_WHERE.$req_Genre_texte;
+		$req_Groupe_WHERE = $req_Groupe_WHERE.$req_Genre_texte;
 	}
 
 	//par pratiques

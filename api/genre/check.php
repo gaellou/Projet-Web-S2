@@ -12,6 +12,11 @@ function checkPut($genre)
 	return $valide;
 }
 
+function checkSearch($genre)
+{
+	return checkPut($genre);
+}
+
 function checkGenre($genre)
 {
 	$valide = is_string($genre['nom']);

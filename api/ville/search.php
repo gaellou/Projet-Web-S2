@@ -1,6 +1,6 @@
 <?php
 
-/* Recherche une ville à partir de :
+/*Mets à jour une ville à partir de son id:
 * - son nom, code postal
 */
 
@@ -8,7 +8,7 @@
 header("Content-Type: application/json; charset=UTF-8");
 
 $method = strtolower($_SERVER["REQUEST_METHOD"]);
-if( $method !== "put"  || !isset($_REQUEST) )
+if( $method !== "get"  || !isset($_GET) )
 {
 	header(http_response_code(405));
 	echo json_encode(array('message' => 'Cette méthode est inacceptable.'));
@@ -16,36 +16,27 @@ if( $method !== "put"  || !isset($_REQUEST) )
 }
 
 /** RÉCUP INFOS CLIENT **/
-
 //
 $ville = array();
-$ville['nom'] = isset($_REQUEST['nom']) ? $_REQUEST['nom'] : NULL;
-$ville['code_postal'] = isset($_REQUEST['code_postal']) ? intval($_REQUEST['code_postal']) : NULL;
+$ville['nom'] = isset($_GET['nom']) ? $_GET['nom'] : NULL;
+$ville['code_moins'] = isset($_GET['code_moins']) ? intval($_GET['code_moins']) : NULL;
+$ville['code_plus'] = isset($_GET['code_plus']) ? intval($_GET['code_plus']) : NULL;
 //
+
 
 //
 /** FIN RÉCUP CLIENT **/
 
 
+
 /** VÉRIFICATIONS **/
 require_once "../data/MyPDO.musiciens-groupes.include.php";
+require_once 'check.php';
 
 $conn = MyPDO::getInstance();
 
-require_once '../data/commun.php';
-require_once 'check.php';
 
-if( !isset($_REQUEST["id"]) || !checkID(intval($_REQUEST["id"]), 'id', 'Ville', $conn) )
-{
-	header(http_response_code(406));
-	$message = array( "message" => "Identifiant absent ou incorrect." );
-	echo json_encode($message);
-	exit();
-}
-
-$id = intval($_REQUEST['id']);
-
-if( !checkPut($ville) ) 
+if( !checkSearch($ville) ) 
 {
 	$message = array( "message" => "Arguments incorrects ou absents." );
 	echo json_encode($message);
@@ -56,9 +47,7 @@ if( !checkPut($ville) )
 /** REQUÊTE BDD **/
 require_once 'function.php';
 
-$ancien= selectTown($id, $conn);
-
-$reponse = updateTown($ancien, $ville, $conn);
+$reponse = searchTown($ville, $conn);
 
 
 /** FIN TRAITEMENT **/

@@ -1,9 +1,9 @@
 <?php
 
-/*Crée un concert à partir de :
-* - son nom, prénom, sa date de naissance  et l'id de sa salle,
-* - facultativement des id des intstruments (avec année de début)
-* et genres favoris.
+/*Met à jour un concert à partir de :
+* - sa date
+* - l'id de sa salle,
+* - l'id du groupe.
 */
 
 

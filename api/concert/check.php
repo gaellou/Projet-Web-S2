@@ -4,8 +4,8 @@
 function checkPost($concert, $groupe, $salle, $conn)
 {
 	$valide = checkGig($concert);
-	$valide = $valide & checkBand($groupe, $conn);
-	$valide = $valide & checkVenue($salle, $conn);
+	$valide &= checkBand($groupe, $conn);
+	$valide &= checkVenue($salle, $conn);
 	return $valide;
 }
 
@@ -13,11 +13,22 @@ function checkPut($concert, $groupe, $salle, $conn)
 {
 	$valide = checkGig_UPDATE($concert);
 	if( isset($groupe) )
-		$valide = $valide & checkBand($groupe, $conn);
+		$valide &= checkBand($groupe, $conn);
 	if( isset($salle) )
-		$valide = $valide & checkVenue($salle, $conn);
+		$valide &= checkVenue($salle, $conn);
 	return $valide;
- }
+}
+
+function checkSearch($concert, $groupe, $salle, $conn)
+{
+
+$valide = checkGig_SEARCH($concert);
+	if( isset($groupe) )
+		$valide &= checkBand($groupe, $conn);
+	if( isset($salle) )
+		$valide &= checkVenue($salle, $conn);
+	return $valide;
+}
 function checkGig($concert)
 {
 	$valide = (strtotime($concert['date_concert']) !== false );
@@ -28,7 +39,17 @@ function checkGig_UPDATE($concert)
 {
 	$valide = true;
 	if( isset($concert['date_concert']) )
-		$valide = $valide & (strtotime($concert['date_concert']) !== false );
+		$valide &= (strtotime($concert['date_concert']) !== false );
+	return $valide;
+}
+
+function checkGig_SEARCH($concert)
+{
+	$valide = true;
+	if( isset($concert['date_avant']) )
+		$valide &= (strtotime($concert['date_avant']) !== false );
+	if( isset($concert['date_apres']) )
+		$valide &= (strtotime($concert['date_apres']) !== false );
 	return $valide;
 }
 

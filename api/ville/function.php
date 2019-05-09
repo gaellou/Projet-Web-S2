@@ -55,6 +55,55 @@ SQL
 
 }
 
+function searchTown($ville, $conn)
+{
+	require_once '../data/MyPDO.musiciens-groupes.include.php';
+
+	$req_Ville_JOIN = "";
+	$req_Ville_WHERE = "WHERE 1 ";
+	$req_Ville_texte = "SELECT DISTINCT v.id AS 'id' FROM `Ville` AS `v`";
+
+
+	//par nom
+	if( isset($ville['nom']) )
+	{
+		$req_Nom_texte = "AND `nom_ville` LIKE '%".$ville['nom']."%'";
+		$req_Ville_WHERE = $req_Ville_WHERE.' '.$req_Nom_texte;
+	}
+	//par code postal, entre deux valeurs
+	if( isset($ville['code_moins']) )
+	{
+		$req_Moins_texte = "AND `code_postal` < {$ville['code_moins']}";
+		$req_Ville_WHERE = $req_Ville_WHERE.' '.$req_Moins_texte;
+	}
+	if( isset($ville['code_plus']) )
+	{
+		$req_Plus_texte = "AND `code_postal` > {$ville['code_plus']}";
+		$req_Ville_WHERE = $req_Ville_WHERE.' '.$req_Plus_texte;
+	}
+
+	var_dump($req_Ville_WHERE);
+
+	$req_Ville =$conn->prepare($req_Ville_texte.' '.$req_Ville_WHERE);
+	$req_Ville->execute();
+
+
+	$nbVilles = 0;
+
+	while( ($ville = $req_Ville->fetch()) !== false )
+	{
+		$resultat[$nbVilles] = selectTown($ville['id'], $conn);
+		$nbVilles++;
+	}
+	if( $nbVilles === 0)
+	{
+		$resultat = array('message' => 'Pas de résultats !');
+	}
+	$resultat['nombre'] = $nbVilles;
+	return $resultat;
+}
+
+
 function selectTown($id, $conn)
 {
 	require_once '../data/MyPDO.musiciens-groupes.include.php';

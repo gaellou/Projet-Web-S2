@@ -2,7 +2,7 @@
 
 function deleteVenue($idSalle, $conn)
 {
-	/* Supprime une sallee, et
+	/* Supprime une salle, et
 	* - supprime les concerts de la salle
 	*/
 
@@ -148,6 +148,59 @@ SQL
 		return $resultat;
 	else
 		return false;
+}
+
+function searchVenue($salle, $ville, $conn)
+{
+	$req_Salle_JOIN = "";
+	$req_Salle_WHERE = "WHERE 1 ";
+	$req_Salle_texte = "SELECT DISTINCT sa.id AS 'id' FROM `Salle` AS `sa`";
+
+
+	//par nom
+	if( isset($salle['nom']) )
+	{
+		$req_Nom_texte = "AND `nom_salle` LIKE '%".$salle['nom']."%'";
+		$req_Salle_WHERE = $req_Salle_WHERE.' '.$req_Nom_texte;
+	}
+	//par capacité
+	if( isset($salle['capacite_moins']) )
+	{
+		$req_Moins_texte = "AND `capacite` < {$salle['capacite_moins']}";
+		$req_Salle_WHERE = $req_Salle_WHERE.' '.$req_Moins_texte;
+	}
+	if( isset($salle['capacite_plus']) )
+	{
+		$req_Plus_texte = "AND `capacite` > {$salle['capacite_plus']}";
+		$req_Salle_WHERE = $req_Salle_WHERE.' '.$req_Plus_texte;
+	}
+	//par ville
+	if( isset($groupe) )
+	{
+		$req_Ville_texte = " AND `id_ville` = {$ville['id']}";
+		$req_Salle_WHERE = $req_Salle_WHERE.$req_Ville_texte;
+	}
+	//
+	$req_Salle_texte = $req_Salle_texte.' '.$req_Salle_WHERE;
+
+	$req_Salle = $conn->prepare($req_Salle_texte);
+	$req_Salle->execute();
+
+	$nbSalles = 0;
+	$resultat = array();
+
+	while( ($salle = $req_Salle->fetch()) !== false )
+	{
+		$resultat[$nbSalles] = selectVenue(intval($salle['id']), $conn);
+		$nbSalles++;
+	}
+	if( $nbSalles === 0)
+	{
+		$resultat = array('message' => 'Pas de résultats !');
+	}
+	$resultat['nombre'] = $nbSalles;
+
+	return $resultat;
 }
 
 function updateVenue($ancien, $salle, $ville, $conn)

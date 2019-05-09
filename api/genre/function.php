@@ -57,11 +57,44 @@ SQL
 	return($reponse);
 }
 
-function selectGenre($id, $conn)
+function searchGenre($genre, $conn)
 {
 	require_once '../data/MyPDO.musiciens-groupes.include.php';
 
-	$conn = MyPDO::getInstance();
+	$req_Genre_JOIN = "";
+	$req_Genre_WHERE = "WHERE 1 ";
+	$req_Genre_texte = "SELECT DISTINCT g.id AS 'id' FROM `Genre` AS `g`";
+
+
+	//par nom
+	if( isset($genre['nom']) )
+	{
+		$req_Nom_texte = "AND `nom_genre` LIKE '%".$genre['nom']."%'";
+		$req_Genre_WHERE = $req_Genre_WHERE.' '.$req_Nom_texte;
+	}
+
+	$req_Genre =$conn->prepare($req_Genre_texte.' '.$req_Genre_WHERE);
+	$req_Genre->execute();
+
+
+	$nbGenres = 0;
+
+	while( ($genre = $req_Genre->fetch()) !== false )
+	{
+		$resultat[$nbGenres] = selectGenre($genre['id'], $conn);
+		$nbGenres++;
+	}
+	if( $nbGenres === 0)
+	{
+		$resultat = array('message' => 'Pas de résultats !');
+	}
+	$resultat['nombre'] = $nbGenres;
+	return $resultat;
+}
+
+function selectGenre($id, $conn)
+{
+	require_once '../data/MyPDO.musiciens-groupes.include.php';
 
 	$req = $conn->prepare(<<<SQL
 		SELECT g.id AS 'id_genre', g.nom_genre AS 'nom_genre'
