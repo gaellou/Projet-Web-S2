@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Sam 23 Mars 2019 à 11:34
--- Version du serveur :  5.7.25-0ubuntu0.18.10.2
--- Version de PHP :  7.2.15-0ubuntu0.18.10.1
+-- Généré le :  Ven 10 Mai 2019 à 09:21
+-- Version du serveur :  5.7.26-0ubuntu0.18.10.1
+-- Version de PHP :  7.2.17-0ubuntu0.18.10.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -41,7 +41,11 @@ INSERT INTO `Concert` (`id`, `date_concert`, `id_groupe`, `id_salle`) VALUES
 (1, '2019-05-29', 1, 8),
 (2, '2019-03-27', 6, 9),
 (3, '2019-03-27', 7, 9),
-(4, '2018-06-21', 8, 15);
+(4, '2018-06-21', 8, 5),
+(5, '2019-05-29', 1, 9),
+(6, '2019-06-03', 1, 3),
+(9, '2019-06-03', 1, 3),
+(10, '2019-06-03', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -66,35 +70,8 @@ INSERT INTO `Genre` (`id`, `nom_genre`) VALUES
 (5, 'Metal'),
 (6, 'Électro'),
 (7, 'Expériemental'),
-(8, 'Humour'),
-(9, 'Chorale'),
-(10, 'Classique');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `Gout`
---
-
-CREATE TABLE `Gout` (
-  `id_musicien` int(11) NOT NULL,
-  `id_genre` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `Gout`
---
-
-INSERT INTO `Gout` (`id_musicien`, `id_genre`) VALUES
-(1, 2),
-(2, 2),
-(2, 4),
-(3, 4),
-(3, 10),
-(4, 3),
-(4, 8),
-(5, 7),
-(5, 9);
+(10, 'Classique'),
+(11, 'Roots');
 
 -- --------------------------------------------------------
 
@@ -115,8 +92,11 @@ CREATE TABLE `Groupe` (
 INSERT INTO `Groupe` (`id`, `nom_groupe`, `id_genre`) VALUES
 (1, 'Das Wunderbar Web Projekt', 7),
 (6, 'Le cours de Chevreuil', 7),
-(7, 'Le cours de Cherrier', 8),
-(8, 'The Sylvain Cherrier Experience', 4);
+(7, 'Le cours de Cherrier', NULL),
+(8, 'The Sylvain Cherrier Experience', 4),
+(11, 'Hello there', 3),
+(12, 'The Bane of the West Hampshire Tea Party', 5),
+(13, 'The Bane of the West Hampshire Tea Party', 5);
 
 -- --------------------------------------------------------
 
@@ -169,7 +149,11 @@ INSERT INTO `Membre` (`id_groupe`, `id_pratique`, `date_entree`) VALUES
 (6, 2, '2019-01-14'),
 (7, 1, '2019-01-14'),
 (8, 1, '2019-01-14'),
-(8, 9, '2003-05-28');
+(8, 9, '2003-05-28'),
+(11, 2, '1997-04-26'),
+(11, 4, '2003-05-10'),
+(12, 6, '2008-06-12'),
+(13, 6, '2008-06-12');
 
 -- --------------------------------------------------------
 
@@ -192,11 +176,13 @@ CREATE TABLE `Musicien` (
 
 INSERT INTO `Musicien` (`id`, `nom_musicien`, `prenom_musicien`, `date_naissance`, `id_ville`, `date_inscripton`) VALUES
 (1, 'Brami', 'Ruben', '1998-05-04', 1, '2019-03-23 09:48:51'),
-(2, 'Labendzky', 'Pierre', '1998-09-13', 1, '2019-03-23 09:48:51'),
+(2, 'Labendzki', 'Pierre', '1998-09-13', 1, '2019-03-23 09:48:51'),
 (3, 'Vallet', 'Gaëlle', '1998-07-20', 2, '2019-03-23 09:48:51'),
 (4, 'Cherrier', 'Sylvain', '1966-06-06', 1, '2019-03-23 09:48:51'),
 (5, 'Chevreuil', 'Antoine', '1960-02-02', 1, '2019-03-23 09:48:51'),
-(6, 'Thiel', 'Pierre', '1997-04-01', 4, '2019-03-23 09:48:51');
+(6, 'Thiel', 'Pierre', '1997-04-01', 4, '2019-03-23 09:48:51'),
+(22, 'Pinché Holden', 'James', '2098-12-25', 4, '2019-04-23 11:14:07'),
+(23, 'Bouchuncoin', 'Satan', '0666-06-06', 2, '2019-04-26 12:34:55');
 
 -- --------------------------------------------------------
 
@@ -217,13 +203,17 @@ CREATE TABLE `Pratique` (
 
 INSERT INTO `Pratique` (`id`, `id_musicien`, `id_instrument`, `annee_debut`) VALUES
 (1, 4, 5, 1970),
-(2, 5, 4, 1966),
+(2, 5, 4, 0000),
 (4, 6, 2, 2003),
 (5, 2, 5, 2005),
-(6, 3, 3, 2003),
+(6, 3, 3, 0000),
 (7, 3, 8, 2019),
 (8, 1, 7, 2016),
-(9, 5, 1, 1990);
+(9, 5, 1, 1990),
+(46, 22, 4, 1956),
+(47, 22, 8, 1967),
+(48, 23, 3, 0000),
+(49, 23, 6, 1999);
 
 -- --------------------------------------------------------
 
@@ -249,9 +239,9 @@ INSERT INTO `Salle` (`id`, `nom_salle`, `capacite`, `id_ville`) VALUES
 (4, 'Le Bataclan', 1500, 13),
 (5, 'L\'Olympia', 1900, 14),
 (6, 'La Philharmonie', 3000, 12),
-(7, 'Le Zénith', 5830, 15),
 (8, 'Le Mil\'s Pub', 40, 11),
-(9, 'La 1B040', 47, 1);
+(9, 'La 1B040', 47, 1),
+(11, 'La Frappe', 2, 3);
 
 -- --------------------------------------------------------
 
@@ -279,7 +269,8 @@ INSERT INTO `Ville` (`id`, `nom_ville`, `code_postal`) VALUES
 (12, 'Paris 19', 75019),
 (13, 'Paris 11', 75011),
 (14, 'Paris 9', 75009),
-(15, 'Paris 18', 77018);
+(15, 'Paris 18', 77018),
+(16, 'Clermont-Ferrand', 63000);
 
 --
 -- Index pour les tables exportées
@@ -296,12 +287,6 @@ ALTER TABLE `Concert`
 --
 ALTER TABLE `Genre`
   ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `Gout`
---
-ALTER TABLE `Gout`
-  ADD PRIMARY KEY (`id_musicien`,`id_genre`);
 
 --
 -- Index pour la table `Groupe`
@@ -354,42 +339,42 @@ ALTER TABLE `Ville`
 -- AUTO_INCREMENT pour la table `Concert`
 --
 ALTER TABLE `Concert`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT pour la table `Genre`
 --
 ALTER TABLE `Genre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT pour la table `Groupe`
 --
 ALTER TABLE `Groupe`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT pour la table `Instrument`
 --
 ALTER TABLE `Instrument`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT pour la table `Musicien`
 --
 ALTER TABLE `Musicien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT pour la table `Pratique`
 --
 ALTER TABLE `Pratique`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Rajouté par rapport au MLD, pour lier à Membre et éviter l''association triple.', AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Rajouté par rapport au MLD, pour lier à Membre et éviter l''association triple.', AUTO_INCREMENT=50;
 --
 -- AUTO_INCREMENT pour la table `Salle`
 --
 ALTER TABLE `Salle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT pour la table `Ville`
 --
 ALTER TABLE `Ville`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
