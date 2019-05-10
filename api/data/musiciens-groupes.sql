@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Ven 10 Mai 2019 à 09:21
+-- Généré le :  Ven 10 Mai 2019 à 10:10
 -- Version du serveur :  5.7.26-0ubuntu0.18.10.1
 -- Version de PHP :  7.2.17-0ubuntu0.18.10.1
 
@@ -19,6 +19,31 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `musiciens-groupes`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Aime`
+--
+
+CREATE TABLE `Aime` (
+  `id_musicien` int(11) NOT NULL,
+  `id_genre` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `Aime`
+--
+
+INSERT INTO `Aime` (`id_musicien`, `id_genre`) VALUES
+(1, 2),
+(2, 2),
+(2, 4),
+(3, 4),
+(3, 10),
+(4, 3),
+(5, 7),
+(5, 9);
 
 -- --------------------------------------------------------
 
@@ -275,6 +300,12 @@ INSERT INTO `Ville` (`id`, `nom_ville`, `code_postal`) VALUES
 --
 -- Index pour les tables exportées
 --
+
+--
+-- Index pour la table `Aime`
+--
+ALTER TABLE `Aime`
+  ADD PRIMARY KEY (`id_musicien`,`id_genre`);
 
 --
 -- Index pour la table `Concert`
