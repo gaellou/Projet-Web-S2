@@ -16,19 +16,8 @@ h1
 	width: 95%;
 	align-content: center;
 	background: grey;
-	display: grid;
-  	grid-template-columns: repeat(4, 2fr);
-  	grid-gap: 10px;
-  	grid-auto-rows: 100px;
-  	grid-template-areas: 
-   	"S S S S"
-    "a b c d "  
-    "z y g h" 
-    "e f i j" 
-    "P P P P"
-   
-    ;
-  	align-items: left;
+	
+  	align-items: center;
   	border-radius: 25px;
 }
 
