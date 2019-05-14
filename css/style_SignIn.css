@@ -36,69 +36,6 @@ input
 }
 
 
-#txtSignIn
-{
-		grid-area: S;
-}
-
-#TxtfstName
-{	
-	grid-area : a;
-}
-
-#SignIn_firstname
-{
-	grid-area :b;
-}
-
-#TxtlstName
-{
-	grid-area :c ;
-}
-
-#SignIn_lastname
-{
-	grid-area : d;
-}
-#TxtDate
-{
-	grid-area: z
-}
-
-#SigIn_date
-{
-	grid-area: : y;
-}
-
-#TxtGenre
-{
-	grid-area :e;
-}
-
-#SignIn_genre[]
-{
-	grid-area : f;
-}
-
-#TxtLoca
-{
-	grid-area :g;
-}
-
-#SignIn_town
-{
-	grid-area :h;
-}
-
-#TxtInstru
-{
-	grid-area :i;
-}
-
-#SignIn_instruments[]
-{
-	grid-area :j;
-}
 
 #textForm
 {

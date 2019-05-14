@@ -30,60 +30,6 @@ h1{
   	align-items: center;
   	border-radius: 25px;
 }
-#TxtSearch
-{
-		grid-area: z;
-}
-
-#TxtfstName
-{	
-	grid-area : a;
-}
-
-#search_firstname
-{
-	grid-area :b;
-}
-
-#TxtlstName
-{
-	grid-area :c ;
-}
-
-#search_lastname
-{
-	grid-area : d;
-}
-
-#TxtGenre
-{
-	grid-area :e;
-}
-
-#search_genre[]
-{
-	grid-area : f;
-}
-
-#TxtLoca
-{
-	grid-area :g;
-}
-
-#search_town
-{
-	grid-area :h;
-}
-
-#TxtInstru
-{
-	grid-area :i;
-}
-
-#search_instruments[]
-{
-	grid-area :j;
-}
 
 
 #textForm
