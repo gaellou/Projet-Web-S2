@@ -24,11 +24,76 @@ h1{
 	width: 95%;
 	align-content: center;
 	background: grey;
-	
-  	align-items: center;
+	display: grid;
+  	grid-template-columns: repeat(2, 5fr);
+  	grid-gap: 10px;
+  	grid-auto-rows: 100px;
+  	grid-template-areas: 
+   " z z " 
+    "a b "
+    "c d "
+    "e f "
+    "g h "
+    "i j "
+   "P P"
+    ;
+  	align-items: left;
   	border-radius: 25px;
 }
+#TxtSeach
+{
+		grid-area: z;
+}
 
+#TxtfstName
+{	
+	grid-area : a;
+}
+
+#search_firstname
+{
+	grid-area :b;
+}
+
+#TxtlstName
+{
+	grid-area :c ;
+}
+
+#search_lastname
+{
+	grid-area : d;
+}
+
+#TxtGenre
+{
+	grid-area :e;
+}
+
+#search_genre[]
+{
+	grid-area : f;
+}
+
+#TxtLoca
+{
+	grid-area :g;
+}
+
+#search_town
+{
+	grid-area :h;
+}
+
+#TxtInstru
+{
+	grid-area :i;
+}
+
+#search_instruments[]
+{
+	grid-area :j;
+}
 
 
 #textForm
@@ -94,7 +159,10 @@ button:hover
   	background-color: #FF6656;
 }
 
-
+/*Le cercle de selection était beaucoup trop gros, du coup j'ai 
+mis en commentaire le style de input. Tu pourras le modifier.
+*/
+/*
 input 
 {	
 	width: 60%;
@@ -107,6 +175,10 @@ input
 	font-size: 16px;
 	font-family: sans-serif,Arial;
 	color: gray;
+}*/
+
+.radio{
+	postion: absolute;
 }
 
 .textForm
