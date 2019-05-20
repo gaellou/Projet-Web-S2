@@ -4,7 +4,7 @@ function deleteGenre($idGenre, $conn)
 {
 	/* Supprime un genre et :
 	* - Supprime les occurrences du genre dans les favoris des musiciens
-	* - fixe à NULL le genre des groupe au genre.
+	* - fixe à NULL le genre des groupes au genre.
 	*/
 	require_once "../data/MyPDO.musiciens-groupes.include.php";
 
@@ -138,8 +138,8 @@ function updateGenre($ancien, $genre, $conn)
 				WHERE`id` = {$id}
 SQL
 ;
-		$modif_Concert= $conn->prepare($req_total);
-		$modif_Concert->execute();
+		$modif_Genre = $conn->prepare($req_total);
+		$modif_Genre->execute();
 	}
 	/** **/
 

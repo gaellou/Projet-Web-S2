@@ -29,7 +29,7 @@ function checkPut($musicien, $ville, $genres, $instruments, $conn)
 
 function checkSearch($musicien, $dates, $ville, $genres, $instruments, $conn)
 {
-	$valide = checkMusician_UPDATE($musicien, $conn);
+	$valide = checkMusician_SEARCH($musicien, $conn);
 	if( isset($ville) )
 		$valide &= checkTown($ville, $conn);
 	if( isset($genres) )
@@ -50,6 +50,19 @@ function checkMusician_CREATE($musicien, $conn)
 	$valide &= (strtotime($musicien['date_naissance']) !== false );
 	return $valide;
 }
+
+function checkMusician_SEARCH($musicien, $conn)
+{
+	$valide = is_string($musicien['nom']);
+	$valide &= is_string($musicien['prenom']);
+	if( isset($musicien['date_avant']) )
+		$valide &= (strtotime($concert['date_avant']) !== false );
+	if( isset($musicien['date_apres']) )
+		$valide &= (strtotime($concert['date_apres']) !== false );
+
+	return $valide;
+}
+
 
 function checkMusician_UPDATE($musicien, $conn)
 {

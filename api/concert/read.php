@@ -58,6 +58,7 @@ $conn = MyPDO::getInstance();
 
 $resultat = selectAllGigs($conn);
 
+sort($resultat);
 
 echo json_encode($resultat);
 header( http_response_code(200) );
