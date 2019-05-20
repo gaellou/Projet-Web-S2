@@ -208,23 +208,23 @@ document.getElementById('button-search').onclick = event => {
 	var nbInstrumentsChecked=0;
 	var stringIdInstruments="";
 	var ul2 = document.getElementById("list-instrument");
-	items = ul2.getElementsByTagName("li");
+	var items2 = ul2.getElementsByTagName("li");
 	
 	/*La prochaine boucle for va permettre de créer la chaine contenant les id des instruments cochés.
 	  Ce sera stringIdInstruments.
 	*/
-	for(var i=0; i<items.length; ++i){
+	for(var i=0; i<items2.length; ++i){
 		//console.log(items[i]);
-		console.log(items[i].firstElementChild.value + " : " + items[i].firstElementChild.checked);
+		console.log(items2[i].firstElementChild.value + " : " + items2[i].firstElementChild.checked);
 		
-		if(items[i].firstElementChild.value == "Tous les instruments" && items[i].firstElementChild.checked){
-			for(var j=0; j<items.length; ++j)
-				items[j].firstElementChild.checked=true;//si tous les genres est coché, on coche toutes les autres cases.
+		if(items2[i].firstElementChild.value == "Tous les instruments" && items2[i].firstElementChild.checked){
+			for(var j=0; j<items2.length; ++j)
+				items2[j].firstElementChild.checked=true;//si tous les genres est coché, on coche toutes les autres cases.
 		}
-		else if(items[i].firstElementChild.value != "Tous les instruments" && items[i].firstElementChild.checked){
+		else if(items2[i].firstElementChild.value != "Tous les instruments" && items2[i].firstElementChild.checked){
 			nbInstrumentsChecked++;
 			for(var j=0; j<tabNomsInstruments.length; j++){
-				if(tabNomsInstruments[j]==items[i].firstElementChild.value)
+				if(tabNomsInstruments[j]==items2[i].firstElementChild.value)
 					stringIdInstruments=stringIdInstruments.concat(tabIdInstruments[j] + ",");
 			}
 		}
