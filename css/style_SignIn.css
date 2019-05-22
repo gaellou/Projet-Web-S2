@@ -2,25 +2,12 @@
 body {
     align-content: center;
     
-    font-family: 'Inconsolata', monospace;   background: url(img/fond_index_haut.png) no-repeat top center;
-	 background-size: 100em; 
+    font-family: 'Inconsolata', monospace;    
 }
 h1
 {
 	text-align: center;
 }
-
-.btn-arrow {
-	font-size: 2em;
-    color: black;
-
-    margin: 10px;
-    position: relative;
-    width: 6rem;
-    height: 6rem;
-
-}
-
 
 #SignInForm{
 	margin-top: 40px;

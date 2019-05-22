@@ -103,7 +103,8 @@ SQL
 	{
 		$trouve = true;
 
-		$resultat['instrument']['id'] = $instrument['nom_instrument'];
+		$resultat['instrument']['id'] = $instrument['id_instrument'];
+		$resultat['instrument']['nom'] = $instrument['nom_instrument'];
 	}
 	if( $trouve )
 		return $resultat;
@@ -122,15 +123,12 @@ function updateInstrument($ancien, $instrument, $conn)
 	{
 		$texte_nom = isset($instrument['nom']) ? "`nom_instrument` = '{$instrument['nom']}'" : "`nom_instrument` = '{$ancien['instrument']['nom']}'";
 
-		var_dump($texte_nom);
-
 		$req_total = <<<SQL
 			UPDATE `Instrument`
 				SET {$texte_nom}
 				WHERE`id` = {$id}
 SQL
 ;
-
 		$modif_Instrument= $conn->prepare($req_total);
 		$modif_Instrument->execute();
 	}

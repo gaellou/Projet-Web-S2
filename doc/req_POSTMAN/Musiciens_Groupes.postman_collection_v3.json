@@ -1159,7 +1159,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://127.0.0.1/imac_toile_2/api/ville/read.php",
+							"raw": "http://127.0.0.1/imac_toile_2/api/salle/read.php",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1170,7 +1170,7 @@
 							"path": [
 								"imac_toile_2",
 								"api",
-								"ville",
+								"salle",
 								"read.php"
 							]
 						}
@@ -1738,7 +1738,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://127.0.0.1/imac_toile_2/api/genre/delete.php?id=11",
+							"raw": "http://127.0.0.1/imac_toile_2/api/instrument/delete.php?id=12",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1749,13 +1749,58 @@
 							"path": [
 								"imac_toile_2",
 								"api",
-								"genre",
+								"instrument",
 								"delete.php"
 							],
 							"query": [
 								{
 									"key": "id",
+									"value": "12"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1/imac_toile_2/api/instrument/update.php?id=11&nom=Kazooie",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"imac_toile_2",
+								"api",
+								"instrument",
+								"update.php"
+							],
+							"query": [
+								{
+									"key": "id",
 									"value": "11"
+								},
+								{
+									"key": "nom",
+									"value": "Kazooie"
 								}
 							]
 						}

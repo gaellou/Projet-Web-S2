@@ -17,21 +17,6 @@ h1{
 
 }
 
-h2{margin-bottom: 25px;}
-
-
-.btn-arrow {
-	font-size: 2em;
-    color: black;
-
-    margin: 10px;
-    position: relative;
-    width: 6rem;
-    height: 6rem;
-
-}
-
-
 #ResearchMusician{
 	margin-top: 40px;
 	margin-left: auto;
@@ -57,7 +42,7 @@ h2{margin-bottom: 25px;}
 }
 #TxtSeach
 {
-		margin-bottom: 15px;
+		grid-area: z;
 }
 
 #TxtfstName
@@ -177,38 +162,20 @@ button:hover
 /*Le cercle de selection était beaucoup trop gros, du coup j'ai 
 mis en commentaire le style de input. Tu pourras le modifier.
 */
-
+/*
 input 
 {	
-	width: 50%;
-	height: 30px;
+	width: 60%;
+	height: 50px;
 	position: relative;
 	outline: none;
 	border:2px solid #ddd;
   	padding-left: 10px;
 	border-radius: 10px;
-	font-size: 12px;
+	font-size: 16px;
 	font-family: sans-serif,Arial;
 	color: gray;
-	margin-bottom: 10px;
-}
-#input-checkbox-tous{color: gray;
-	margin-bottom: 10px;
-	border-radius: 10px;
-	width: 30px;
-}
-select{width: 50%;
-	height: 30px;
-	position: relative;
-	outline: none;
-	border:2px solid #ddd;
-  	padding-left: 10px;
-	border-radius: 10px;
-	font-size: 12px;
-	font-family: sans-serif,Arial;
-	color: gray;
-	margin-bottom: 10px;}
-
+}*/
 
 .radio{
 	postion: absolute;

@@ -1,7 +1,6 @@
 /* fonts import */
 @import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700');
 body {
-	margin-top: 15%;
     align-content: center;
     
     font-family: 'Inconsolata', monospace;    
@@ -17,18 +16,6 @@ h1{
 	 border-radius: 20px;
 
 }
-
-.btn-arrow {
-	font-size: 2em;
-    color: black;
-
-    margin: 10px;
-    position: relative;
-    width: 6rem;
-    height: 6rem;
-
-}
-
 
 #ResearchMusician{
 	margin-top: 40px;
