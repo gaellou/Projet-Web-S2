@@ -4,6 +4,9 @@ const searchTown = document.getElementById('search_town');
 
 const searchGenres = document.getElementById('search_genres[]');
 const searchInstruments = document.getElementById('search_instruments[]');*/
+
+const HOST_PATH = "https://perso-etudiant.u-pem.fr/~pthiel/imac_toile_2/";
+
 Document.prototype.ready = callback => {
 	if(callback && typeof callback === 'function') {
 		document.addEventListener("DOMContentLoaded", () =>  {
@@ -18,7 +21,7 @@ var tabNomsVilles = [];
 var tabIdVilles = [];
 
 document.ready( () => {
-	fetch("http://localhost:8888/Projet/Random_Platypus__Projet-Web-S2--master/api/ville/read.php") // à corriger si cela ne fonctionne pas
+	fetch(HOST_PATH+"api/ville/read.php") // à corriger si cela ne fonctionne pas
 		.then( response => response.json())
 		.then( data => {
 			let villes = document.getElementById('list-ville');
@@ -57,7 +60,7 @@ var tabNomsGenres = [];
 var tabIdGenres = [];
 
 document.ready( () => {
-	fetch("http://localhost:8888/Projet/Random_Platypus__Projet-Web-S2--master/api/genre/read.php") // à corriger si cela ne fonctionne pas
+	fetch(HOST_PATH+"api/genre/read.php") // à corriger si cela ne fonctionne pas
 		.then( response => response.json())
 		.then( data => {
 			let genres = document.getElementById('list-genre');
@@ -106,7 +109,7 @@ var tabNomsInstruments = [];
 var tabIdInstruments = [];
 
 document.ready( () => {
-	fetch("http://localhost:8888/Projet/Random_Platypus__Projet-Web-S2--master/api/instrument/read.php") // à corriger si cela ne fonctionne pas
+	fetch(HOST_PATH+"api/instrument/read.php") // à corriger si cela ne fonctionne pas
 		.then( response => response.json())
 		.then( data => {
 			let instruments = document.getElementById('list-instrument');
@@ -247,7 +250,7 @@ document.getElementById('button-search').onclick = event => {
 	if(stringIdGenres !="") params['genres'] = stringIdGenres;
 	if(stringIdInstruments !="") params['instruments'] = stringIdInstruments;
 	
-	let url = new URL("/Projet/Random_Platypus__Projet-Web-S2--master/api/musicien/search.php", "http://localhost:8888");
+	let url = new URL("api/musicien/search.php", HOST_PATH);
 	url.search = new URLSearchParams(params);
 	console.log(url);
 	
@@ -259,14 +262,14 @@ document.getElementById('button-search').onclick = event => {
 			console.log(data);
 			
 			if(data.nombre == 0)
-				resultat.innerHTML = "Il n'y a aucun musicien qui correspond à votre recherche.";
+				resultat.innerHTML = "Aucun musicien ne correspond à votre recherche.";
 			
 			else if(data.nombre == 1)
 				resultat.innerHTML = "L'unique musicien correspondant à votre recherche est : <br><br> - "+data[0].musicien.prenom+" "+data[0].musicien.nom+" ("+data[0].musicien.id+")" ;
 				
 			
 			else{
-				resultat.innerHTML = "Les musiciens correspondants à votre recherche sont : <br><br>";
+				resultat.innerHTML = "Les musiciens correspondant à votre recherche sont : <br><br>";
 			
 				for(var i=0; i<data.nombre; i++){
 					console.log(data[i].musicien);

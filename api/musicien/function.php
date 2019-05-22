@@ -387,9 +387,7 @@ function searchMusician($musicien, $dates, $ville, $instruments, $genres, $conn)
 
 	
 	$req_Musicien_texte = $req_Musicien_texte.' '.$req_Musicien_JOIN.' '.$req_Musicien_WHERE;
-
-	print_r($req_Musicien_texte);
-
+	
 	$req_Musicien = $conn->prepare($req_Musicien_texte);
 	$req_Musicien->execute();
 

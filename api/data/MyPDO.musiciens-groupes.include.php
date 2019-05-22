@@ -5,7 +5,7 @@ require_once 'MyPDO.class.php';
 // TO DO : à modifier
 // host=votre serveur (localhost si travail en local)
 // n'oubliez pas d'ajouter le port (sur mac notamment, ex: localhost:8080)
-MyPDO::setConfiguration('mysql:host=localhost;dbname=musiciens-groupes;charset=utf8', 'root', 'root');
+MyPDO::setConfiguration('mysql:host= sqletud.u-pem.fr;dbname=pthiel_db;charset=utf8', 'pthiel', 'root');
 
 
 /*
