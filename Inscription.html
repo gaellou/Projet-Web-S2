@@ -1,34 +1,58 @@
 <!doctype html>
 <html>
-<link href="css/style_SignIn.css" rel="stylesheet"/>
-	<body>
+<head>
+	<meta charset="utf-8">
+	<title>Inscription</title>
+	<link rel="stylesheet"  href="css/style_SignIn.css">
+</head>
+<body>
 		
-		<div id='SignInForm'>
-		<div></div>
-		<h1 id='txtSignIn'> Inscription </h1>
-		<div>
-	<label id = 'TxtfstName' for="name" class="textForm">Prénom :</label>
-		<input type="text" id='signIn_firstname' class='TextInput' ></div>
-		<div>
-	
-	<label id='TxtlstName' for="name" class="textForm">Nom :</label>
-		<input type="text" id="signIn_lastname" class='TextInput'  ></div>
-		<div>
-	<label id='TxtDate' for='name' classe="textForm"> Date de naissance :</label>
-		<input type="date" name="SignIn_date"></div>
-		<div>
-	<label id='TxtGenre' for="name" class="textForm">Genre :</label>
-		<input type="text" id="signIn_genre[]" class='TextInput'  ></div>
-	<div>
-	<label id ='TxtLoca' for="name" class="textForm">Localisation :</label>
-			<input type="text" id="signIn_town" class='TextInput'  ></div>
-	<div>
-	<label id='TxtInstru' for="name" class="textForm">Instrument :</label>
-		<input type="text" id="signIn_instruments[]"  class='TextInput' ></div>
-
+	<div id='SignInForm'>
+	<div></div>
+	<h1 id='txtSignIn'> Inscription </h1>
+	<form id='form-inscription'>
+		<ul>
+			<li>
+				<label id = 'TxtfstName' for="name" class="textForm">Prénom :</label>
+					<input type="text" name="prenom" id='signIn_firstname' class='TextInput' >
+			</li>
+			<li>
+				<label id='TxtlstName' for="name" class="textForm">Nom :</label>
+					<input type="text" name="nom"id="signIn_lastname" class='TextInput' >	
+			</li>
+			<li>
+				<label id='TxtDate' for='name' classe="textForm"> Date de naissance :</label>		
+					<input type="date" name='dateNaissance' name="SignIn_date">
+			</li>
+			<li id="genres">
+				<span><label id='TxtGenre' for="name" class="textForm"> Tu joues plutôt quel(s) genre(s) ? :</label></span>
+					<ul id="list-genre">
+					</ul>
+			<button id="button-proposer-genre">Proposer un genre !</button>
+			<label id ='TxtProposeGenre' for="name" class="textForm"> </label>
+			<!-- ici après clic, on crée une selection text pour le genre de ce type : <input type="text" name="propseGenre" id="ajouterGenre" class='TextInput'>-->
+			</li>
+			<li id="villes">
+				Indique ta ville ! :
+				<select id="list-ville" name='ville'>
+					<option value="vide">--Sélectionnez une ville--</option>
+				</select>
+				<button id="button-proposer-ville">Ma ville n'est pas présente dans la liste</button>
+				<label id ='TxtProposeVille' for="name" class="textForm"></label>
+				<!-- ici après clic, on crée une selection text pour la ville de ce type : <input type="text" name="propseVille" id="ajouterVille" class='TextInput'>-->
+			</li>
+			<li id="instruments">
+				<span><label id='TxtGenre' for="name" class="textForm">De quel(s) instrument(s) joues-tu ? :</label></span>
+					<ul id="list-instrument">
+					</ul>
+				<button id="button-proposer-instrument">Proposer un instrument !</button>
+				<label id ='TxtProposeInstrument' for="name" class="textForm"> </label>
+			</li>
+		</ul>
+	</form>
 	<button id="button-signIn">C'est parti !</button>
 
 		</div>
-
-	</body>
+	<script src='js/inscription.js'></script>
+</body>
 </html>
