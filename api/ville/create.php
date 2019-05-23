@@ -35,7 +35,7 @@ $conn = MyPDO::getInstance();
 
 /** VÉRIFICATIONS **/
 
-if( !checkPost($ville) ) 
+if( !checkPost($ville, $conn) ) 
 {
 	$message = array( "message" => "Arguments incorrects ou absents." );
 	echo json_encode($message);

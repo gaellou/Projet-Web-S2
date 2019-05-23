@@ -32,16 +32,12 @@ function deleteVenueFromTown($idVille, $conn)
 
 	require_once "../data/MyPDO.musiciens-groupes.include.php";
 
-	$crea_table = $conn->prepare(<<<SQL
-		CREATE TABLE IF NOT EXISTS `Concert_suppr` (`id` INT PRIMARY KEY NOT NULL)
-SQL
-	);
 
 	$crea_declencheur = $conn->prepare(<<<SQL
 		CREATE TRIGGER `decl_Salle`
-			BEFORE DELETE ON `Salle`	FOR EACH ROW
-					INSERT INTO `Concert_suppr` (`id`)
-						VALUES (OLD.`id`)
+			BEFORE DELETE ON `Salle` FOR EACH ROW
+					DELETE FROM `Concert`
+						WHERE `id` = OLD.`id`
 SQL
 	);
 
@@ -51,37 +47,20 @@ SQL
 SQL
 	);
 
-	
 
-	$selec_Concert = $conn->prepare(<<<SQL
-		SELECT `id` FROM `Concert_suppr`
-SQL
-	);
-
-	$suppr_Concert = $conn->prepare(<<<SQL
-		DELETE FROM `Concert`
-			WHERE `id` = ?
-SQL
-	);
-
-	$suppr_declencheur_table = $conn->prepare(<<<SQL
+	$suppr_declencheur = $conn->prepare(<<<SQL
 		DROP TRIGGER IF EXISTS `decl_Salle`;
-		DROP TABLE IF EXISTS `Concert_suppr`;
 SQL
 );
 
-	$crea_table->execute();
 	$crea_declencheur->execute();
+
+	$suppr_declencheur->execute();
 
 	$suppr_Salle->execute();
 
 
-	while( ($concert = $selec_Concert->fetch() ) !== false )
-	{
-		$suppr_Concert->bindValue(1, intval($concert['id']) );
-		$suppr_Concert->execute();
-	}
-	$suppr_declencheur_table->execute();
+	
 }
 
 function createVenue($salle, $ville, $conn)

@@ -25,7 +25,7 @@ $conn = MyPDO::getInstance();
 
 /** VÉRIF **/
 require_once '../data/commun.php';
-if( !isset($_GET["id"]) || !checkID(intval($_GET["id"]), 'id', 'Town', $conn) )
+if( !isset($_GET["id"]) || !checkID(intval($_GET["id"]), 'id', 'Ville', $conn) )
 {
 	$message = array( "message" => "Identifiant incorrect ou absent, échec de suppression." );
 	echo json_encode($message);
