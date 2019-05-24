@@ -1,3 +1,6 @@
+const HOST_PATH = "https://perso-etudiant.u-pem.fr/~pthiel/imac_toile_2/";
+
+
 Document.prototype.ready = callback => {
 	if(callback && typeof callback === 'function') {
 		document.addEventListener("DOMContentLoaded", () =>  {
@@ -12,7 +15,7 @@ var tabNomsVilles = [];
 var tabIdVilles = [];
 
 document.ready( () => {
-	fetch("http://localhost:8888/Projet/Random_Platypus__Projet-Web-S2--master/api/ville/read.php") // à corriger si cela ne fonctionne pas
+	fetch(HOST_PATH+"api/ville/read.php") // à corriger si cela ne fonctionne pas
 		.then( response => response.json())
 		.then( data => {
 			let villes = document.getElementById('list-ville');
@@ -47,7 +50,7 @@ var tabIdGenres = [];
 let genres = document.getElementById('list-genre');
 
 document.ready( () => {
-	fetch("http://localhost:8888/Projet/Random_Platypus__Projet-Web-S2--master/api/genre/read.php") // à corriger si cela ne fonctionne pas
+	fetch(HOST_PATH+"api/genre/read.php") // à corriger si cela ne fonctionne pas
 		.then( response => response.json())
 		.then( data => {
 			//let genres = document.getElementById('list-genre');
@@ -115,7 +118,7 @@ function functDisplay(){
 };
 
 document.ready( () => {
-	fetch("http://localhost:8888/Projet/Random_Platypus__Projet-Web-S2--master/api/instrument/read.php") // à corriger si cela ne fonctionne pas
+	fetch(HOST_PATH+"api/instrument/read.php") // à corriger si cela ne fonctionne pas
 		.then( response => response.json())
 		.then( data => {
 			let instruments = document.getElementById('list-instrument');
