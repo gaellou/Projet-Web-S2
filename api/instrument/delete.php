@@ -26,10 +26,11 @@ $conn = MyPDO::getInstance();
 require_once '../data/commun.php';
 if( !isset($_GET["id"]) || !checkID(intval($_GET["id"]), 'id', 'Instrument', $conn) )
 {
-	$message = array( "message" => "Identifiant incorrect ou absent, échec de suppression." );
+	$message = array( "message" => "Identifiant incorrect ou absent, échec de suppression.",
+						'id' => $_GET['id'] );
 	echo json_encode($message);
 
-	header(http_response_code(406) );
+	header(http_response_code(404) );
 	exit();
 }
 

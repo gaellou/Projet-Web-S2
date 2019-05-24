@@ -16,10 +16,12 @@ function deleteInstrument($idInstrument, $conn)
 SQL
 	);
 
-	$suppr_Instrument->execute();
-
 	/* on supprime les pratique qui impliquent cet instrument */
 	deletePlaysFromInstrument($idInstrument, $conn);
+
+	$suppr_Instrument->execute();
+
+	
 }
 
 function createInstrument($instrument, $conn)

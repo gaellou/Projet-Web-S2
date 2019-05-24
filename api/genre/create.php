@@ -31,7 +31,7 @@ if( !checkPost($genre) )
 {
 	$message = array( "message" => "Arguments incorrects ou absents." );
 	echo json_encode($message);
-	header(http_response_code(406));
+	header(http_response_code(404));
 	exit();
 }
 

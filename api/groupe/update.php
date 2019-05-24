@@ -34,11 +34,13 @@ require_once "../data/MyPDO.musiciens-groupes.include.php";
 $conn = MyPDO::getInstance();
 
 require_once '../data/commun.php';
+
 if( !isset($_REQUEST["id"]) || !checkID(intval($_REQUEST["id"]), 'id', 'Groupe', $conn) )
 {
-	header(http_response_code(406));
-	$message = array( "message" => "Identifiant absent ou incorrect." );
+	$message = array( "message" => "Identifiant absent ou incorrect.",
+						'id' => $_REQUEST['id'] );
 	echo json_encode($message);
+	header(http_response_code(404));
 	exit();
 }
 
@@ -80,9 +82,9 @@ else
 /** VÉRIF **/
 if( !checkPut($groupe, $genre, $membres, $conn) )
 {
-	header(http_response_code(406));
 	$message = array( "message" => "Arguments inacceptables." );
 	echo json_encode($message);
+	header(http_response_code(404));
 	exit();
 }
 
