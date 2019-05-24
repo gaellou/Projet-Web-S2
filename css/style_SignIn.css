@@ -16,6 +16,7 @@ h1
 	margin-left: auto;
 	margin-right: auto;
 	width: 60%;
+	height: 90%;
 	align-content: center;
 	background: #fff;
 	opacity : 0.8 ;
@@ -25,67 +26,46 @@ h1
 
 input 
 {	
-	/*margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-	align-items: center;
-	align-content: center;
-	width: 50%;
+	width: 30%;
 	height: 50px;
 	position: relative;
 	outline: none;
-	border-bottom: :0px solid #ddd;
-	margin-left: 20% ;
-  	padding-left: 10px;
-	border-radius: 10px;
+	border:2px solid #ddd;
+	border-radius: 5px;
+	margin: 15px;
+	margin-left: 35%;
 	font-size: 16px;
-	font-family: sans-serif,Arial;
-	color: gray;*/
-
-    width: 250px;
-    padding: 8px;
-    margin: 7px;
-    border-radius: 5px;
-    outline: none;
-    border: none;
-	border-bottom: 2px solid #fff;
-	background: none;
-	text-align: center;
-	align-items: center;
+	font-family: sans-serif,Helvetica;
+	color: gray;
 	align-content: center;
+  	align-items: center;
+  	text-align: center;
 
 }
 
 
 
-#textForm
-{
-	margin-left: 5px;
-}
-
-
-
-#TextInput
-{
-	top: 25%; left: 1%;
-} 
 
 #button-signIn 
 {	
-	align-items: center;
-	align-content: center;	
-	grid-area:  P ;
-	padding-top: 50px;
+	align-content: center;
+  	align-items: center;
+	width: 300px;
 	text-align: center;
-	border-radius: 5px;
-	padding: 15px 25px;
+	margin: auto;
 	font-size: 22px;
-	text-decoration: none;
-	margin-left: 40%;
-	color: #fff;
+	margin-bottom: 20px;
+	margin-top: 20px;
 	position: relative;
 	display: inline-block;
-	background-color: #384c80;
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	color: #384c80;
+ 	border-width: 2px;
+ 	border-style: solid;
+ 	border-color: #384c80 ;
+ 	border-radius: 5px;
 }
 
 .btn:active {
@@ -97,5 +77,5 @@ input
 
 button:hover 
 {
-  	background-color: #FF6656;
+  	background-color: #fff;
 }

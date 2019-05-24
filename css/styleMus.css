@@ -3,16 +3,16 @@
 body {
     align-content: center;
     
-    font-family: 'Inconsolata', monospace;    
-     background: url(img/fond_index_haut.png) no-repeat top center;
-	 background-size: 100em;
+    font-family: 'Helvetica', monospace;    
+     background: url(img/Mus.jpg) no-repeat top center;
+	 background-size: cover;
 }
 h1{
 	text-align: center;
 	text-shadow: -1px 0 black, 0 1px white;
 	
-	 font-size: 7em;
-	 margin-bottom: 20px;
+	 font-size: 40px;
+	 margin: 40px;
 	 border-radius: 20px;
 
 }
@@ -21,130 +21,80 @@ h1{
 	margin-top: 40px;
 	margin-left: auto;
 	margin-right: auto;
-	width: 95%;
+	width: 60%;
+	height: 600px;
 	align-content: center;
-	background: grey;
-	display: grid;
-  	grid-template-columns: repeat(2, 5fr);
-  	grid-gap: 10px;
-  	grid-auto-rows: 100px;
-  	grid-template-areas: 
-   " z z " 
-    "a b "
-    "c d "
-    "e f "
-    "g h "
-    "i j "
-   "P P"
-    ;
-  	align-items: left;
-  	border-radius: 25px;
+	background: #fff;
+	opacity : 0.8 ;
+  	align-items: center;
+  	border-radius: 5px;
+  	text-align: center;
 }
-#TxtSeach
-{
-		grid-area: z;
 }
-
-#TxtfstName
-{	
-	grid-area : a;
-}
-
-#search_firstname
-{
-	grid-area :b;
-}
-
-#TxtlstName
-{
-	grid-area :c ;
-}
-
-#search_lastname
-{
-	grid-area : d;
-}
-
-#TxtGenre
-{
-	grid-area :e;
-}
-
-#search_genre[]
-{
-	grid-area : f;
-}
-
-#TxtLoca
-{
-	grid-area :g;
-}
-
-#search_town
-{
-	grid-area :h;
-}
-
-#TxtInstru
-{
-	grid-area :i;
-}
-
-#search_instruments[]
-{
-	grid-area :j;
-}
-
-
-#textForm
-{
-	margin-left: 5px;
-}
-
-
-
-#TextInput
-{
-	top: 25%; left: 1%;
-} 
-
 a
 {	
 	color : white;
 }
 
-#button-subscribe
-{	width: 100%;
-	margin : auto;
-	padding-top: 50px;
-	text-align: center;
+input{
+	width: 30%;
+	height: 50px;
+	position: relative;
+	outline: none;
+	border:2px solid #ddd;
 	border-radius: 5px;
-	padding: 15px 25px;
+	margin-bottom: 5px;
+	font-size: 16px;
+	font-family: sans-serif,Helvetica;
+	color: gray;
+	align-content: center;
+  	align-items: center;
+  	text-align: center;
+}
+
+#button-subscribe
+{	
+	grid-area: P;
+	align-content: center;
+  	align-items: center;
+	width: 300px;
+	text-align: center;
+	margin: auto;
 	font-size: 22px;
-	text-decoration: none;
-	margin-bottom: : 15px;
-	color: #fff;
+	margin-bottom: 20px;
+	margin-top: 20px;
 	position: relative;
 	display: inline-block;
-	background-color: #B30F0F;
-	box-shadow: 0px 5px 0px 0px #CE3323;
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	color: #384c80;
+ 	border-width: 2px;
+ 	border-style: solid;
+ 	border-color: #384c80 ;
+ 	border-radius: 5px;
 }
 
 #button-search 
 {	
-	grid-area: P;
-	padding-top: 50px;
+   align-content: center;
+  	align-items: center;
+	width: 300px;
 	text-align: center;
-	border-radius: 5px;
-	padding: 15px 25px;
+	margin: auto;
 	font-size: 22px;
-	text-decoration: none;
-	margin: 20px;
-	color: #fff;
+	margin-bottom: 20px;
+	margin-top: 20px;
 	position: relative;
 	display: inline-block;
-	background-color: #B30F0F;
-	box-shadow: 0px 5px 0px 0px #CE3323;
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	color: #384c80;
+ 	border-width: 2px;
+ 	border-style: solid;
+ 	border-color: #384c80 ;
+ 	border-radius: 5px;
 }
 
 .btn:active {
@@ -158,37 +108,3 @@ button:hover
 {
   	background-color: #FF6656;
 }
-
-/*Le cercle de selection était beaucoup trop gros, du coup j'ai 
-mis en commentaire le style de input. Tu pourras le modifier.
-*/
-/*
-input 
-{	
-	width: 60%;
-	height: 50px;
-	position: relative;
-	outline: none;
-	border:2px solid #ddd;
-  	padding-left: 10px;
-	border-radius: 10px;
-	font-size: 16px;
-	font-family: sans-serif,Arial;
-	color: gray;
-}*/
-
-.radio{
-	postion: absolute;
-}
-
-.textForm
-{
-	margin : auto;
-}
-
-
-
-.TextInput
-{
-	top: 25%; left: 1%;
-} 

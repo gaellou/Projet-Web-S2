@@ -10,43 +10,20 @@
 	<h1> Trouve des musiciens ! </h1>
 	
 	<div></div>
-	<!--<div id = 'ResearchMusician'> <h2 id:'TxtSearch'> Recherche : </h2>	<div>
-		<div>
-		<label id = 'TxtfstName' for="name" class="textForm">Prénom :</label>
-			<input type="text" id='search_firstname' class='TextInput' ></div>
-	<div>
-		<label id='TxtlstName"' for="name" class="textForm">Nom :</label>
-			<input type="text" id="search_lastname" class='TextInput'  ></div>
-			<div>
-		<label id='TxtGenre' for="name" class="textForm">Genre :</label>
 
-			<input type="text" id="search_genre[]" class='TextInput'  >
-	</div><div>
-
-		<label id='TxtInstru' for="name" class="textForm">Instrument :</label>
-
-			<input type="text" id="search_instruments[]"  class='TextInput' ></div>
-
-		<button id="button-search">Search</button>
-
-	</div></div>
--->
 		<div id = 'ResearchMusician'> <h2 id='TxtSearch'> Recherche : </h2>
 		<div>
 		<form id='form-musicien'>
-			<ul>
+			<ul style="list-style: none;">
 				<li>
-					<span><label id = 'TxtfstName' for="name" class="textForm">Prénom :</label></span>
-					<input type="text" id='search_firstname' name='prenom' class='TextInput'>
+					<span><label id = 'TxtfstName' for="name" class="textForm"></label></span>
+					<input type="text" id='search_firstname' placeholder="Prénom" name='prenom' class='TextInput'>
 				</li>
 				<li>
-					<span><label id='TxtlstName' for="name" class="textForm">Nom :</label><span>
-					<input type="text" id="search_lastname" name='nom' class='TextInput'>
+					<span><label id='TxtlstName' for="name" class="textForm"></label><span>
+					<input type="text" id="search_lastname" placeholder="Nom" name='nom' class='TextInput'>
 				</li>
-				<!--<li>
-					<span><label id='TxtVille' for="name" class="textForm">Ville :</label><span>
-					<input type="text" id="search_ville" name='ville' class='TextInput'>
-				</li>-->
+				
 				<li>Ville :
 					<select id="list-ville" name='ville'>
 						<option value="vide">--Sélectionnez une ville--</option>
@@ -62,7 +39,7 @@
 				</li>
 				<li>
 					<span><label id='TxtGenre' for="name" class="textForm">Genre(s) :</label><span>
-						<ul id="list-genre">
+						<ul id="list-genre" style="list-style: none;" >
 							<li>
 								<input id="input-checkbox-tous" type="checkbox" name="genre" value="Tous les genres">
 								<label for="input-checkbox-tous">Tous les genres</label>
@@ -72,7 +49,7 @@
 				</li>
 				<li>
 					<span><label id='TxtInstru' for="name" class="textForm">Instrument(s) :</label><span>
-						<ul id="list-instrument">
+						<ul id="list-instrument" style="list-style: none;">
 							<li>
 								<input id="input-checkbox-tous" type="checkbox" name="instrument" value="Tous les instruments">
 								<label for="input-checkbox-tous">Tous les instruments</label>
@@ -80,7 +57,7 @@
 						</ul>
 				</li>
 			</ul>
-			<button id="button-search">Rechercher</button>
+			<button id="button-search">Et zééé parti !</button>
 		</form>
 		</div>
 		</div>
