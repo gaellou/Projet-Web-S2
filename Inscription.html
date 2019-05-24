@@ -11,18 +11,18 @@
 	<div></div>
 	<h1 id='txtSignIn'> Inscription </h1>
 	<form id='form-inscription'>
-		<ul>
+		<ul style="list-style: none;">
 			<li>
-				<label id = 'TxtfstName' for="name" class="textForm">Prénom :</label>
-					<input type="text" name="prenom" id='signIn_firstname' class='TextInput' >
+				<label id = 'TxtfstName' for="name" class="textForm"></label>
+					<input type="text" name="prenom" id='signIn_firstname' placeholder="Prénom"  class='TextInput' >
 			</li>
 			<li>
-				<label id='TxtlstName' for="name" class="textForm">Nom :</label>
-					<input type="text" name="nom"id="signIn_lastname" class='TextInput' >	
+				<label id='TxtlstName' for="name" class="textForm"></label>
+					<input type="text" name="nom"id="signIn_lastname" placeholder="Nom"  class='TextInput' >	
 			</li>
 			<li>
-				<label id='TxtDate' for='name' classe="textForm"> Date de naissance :</label>		
-					<input type="date" name='dateNaissance' name="SignIn_date">
+				<label id='TxtDate' for='name' classe="textForm"> </label>		
+					<input type="date" name='dateNaissance' placeholder="Date de naissance"  name="SignIn_date">
 			</li>
 			<li id="genres">
 				<span><label id='TxtGenre' for="name" class="textForm"> Tu joues plutôt quel(s) genre(s) ? :</label></span>
@@ -53,6 +53,6 @@
 	<button id="button-signIn">C'est parti !</button>
 
 		</div>
-	<script src='js/musicien/inscription.js'></script>
+	<script src='js/inscription.js'></script>
 </body>
 </html>

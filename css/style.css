@@ -1,122 +1,101 @@
-/* fonts import */
 @import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700');
 body {
-    align-content: center;
-    
-    font-family: 'Inconsolata', monospace;    
-     background: url(img/fond_index_haut.png) no-repeat top center;
-	 background-size: 100em;
+     align-content: center; 
+     text-align: center;
+     font-family: 'Helvetica', monospace;    
+     background : url("img/Concert.png") no-repeat top center;
+     background-size: cover;
+     opacity: 0.8;
+	 /*background-color:  #323a45 ;*/
 }
 h1{
 	text-align: center;
-	text-shadow: -1px 0 black, 0 1px white;
-	
-	 font-size: 7em;
+	/*text-shadow: -1px 0 black, 0 1px white;
 	 margin-bottom: 20px;
-	 border-radius: 20px;
+	 border-radius: 20px;*/
+	 font-size: 7em;
 
 }
 
-#ResearchMusician{
-	margin-top: 40px;
-	margin-left: auto;
-	margin-right: auto;
-	width: 95%;
-	align-content: center;
-	background: grey;
-	
-  	align-items: center;
-  	border-radius: 25px;
-}
-
-
-
-#textForm
-{
-	margin-left: 5px;
+.form-container {
+  position : relative;
+  margin-top: 50px;
+  margin-bottom: -900px;
+  background-color: #fff;
+  width: 400px;
+  height: 400px;
+  display: inline-block;
+  border-radius: 5px;
+  opacity: 0.8;
 }
 
 
 
-#TextInput
-{
-	top: 25%; left: 1%;
-} 
+
+
+
+
 
 a
 {	
-	color : white;
+	color : #fff;
+	opacity: 0.8;
 }
 
 #button-subscribe
-{	width: 100%;
-	margin : auto;
-	padding-top: 50px;
+{	width: auto;
+	margin-bottom: 2%;
+	left: 0%;
 	text-align: center;
 	border-radius: 5px;
-	padding: 15px 25px;
-	font-size: 22px;
+	padding: 20px 20px;
+	font-size: 30px;
 	text-decoration: none;
-	margin-bottom: : 15px;
 	color: #fff;
 	position: relative;
 	display: inline-block;
-	background-color: #B30F0F;
-	box-shadow: 0px 5px 0px 0px #CE3323;
+	background-color: #384c80;
+	border-width: 2px;
+	border-style: solid;
+ 	border-color: #fff;
+ 	align-content: center;
+  	align-items: center;
+
 }
 
 #button-search 
 {	
-	grid-area: P;
-	padding-top: 50px;
-	text-align: center;
-	border-radius: 5px;
-	padding: 15px 25px;
-	font-size: 22px;
-	text-decoration: none;
-	margin: 20px;
-	color: #fff;
+	width: 200px;
+	height: 50px;
 	position: relative;
-	display: inline-block;
-	background-color: #B30F0F;
-	box-shadow: 0px 5px 0px 0px #CE3323;
+	outline: none;
+	border:2px solid #ddd;
+	border-radius: 10px;
+	margin-bottom:  15px;
+	margin-top: 30px;
+	margin-left: 24%;
+	font-size: 16px;
+	font-family: sans-serif,Helvetica;
+	color: #384c80;
+	align-content: center;
+  	align-items: center;
+  	text-align: center;
+  	display: inline-block;
+	display: flex;
+	flex-direction: column;
+ 	padding: 12px;
 }
 
 .btn:active {
   	transform: translate(0px, 5px);
   	-webkit-transform: translate(0px, 5px);
-  	box-shadow: 0px 1px 0px 0px;
+  	/*box-shadow: 0px 1px 0px 0px;*/
 }
+
 
 
 button:hover 
 {
-  	background-color: #FF6656;
+  	background-color: #384c80;
+  	color : #fff;
 }
-
-
-input 
-{	
-	width: 60%;
-	height: 50px;
-	position: relative;
-	outline: none;
-	border:2px solid #ddd;
-  	padding-left: 10px;
-	border-radius: 10px;
-	font-size: 16px;
-	font-family: sans-serif,Arial;
-	color: gray;
-}
-
-.textForm
-{
-	margin : auto;
-}
-
-
-
-.TextInput
-{
-	top: 25%; left: 1%;
-} 
