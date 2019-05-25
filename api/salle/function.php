@@ -141,14 +141,14 @@ function searchVenue($salle, $ville, $conn)
 		$req_Salle_WHERE = $req_Salle_WHERE.' '.$req_Nom_texte;
 	}
 	//par capacité
-	if( isset($salle['capacite_moins']) )
+	if( isset($salle['capacite_min']) )
 	{
-		$req_Moins_texte = "AND `capacite` > {$salle['capacite_moins']}";
+		$req_Moins_texte = "AND `capacite` >= {$salle['capacite_min']}";
 		$req_Salle_WHERE = $req_Salle_WHERE.' '.$req_Moins_texte;
 	}
-	if( isset($salle['capacite_plus']) )
+	if( isset($salle['capacite_max']) )
 	{
-		$req_Plus_texte = "AND `capacite` < {$salle['capacite_plus']}";
+		$req_Plus_texte = "AND `capacite` <= {$salle['capacite_max']}";
 		$req_Salle_WHERE = $req_Salle_WHERE.' '.$req_Plus_texte;
 	}
 	//par ville

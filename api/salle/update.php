@@ -41,7 +41,7 @@ $salle['nom'] = isset($_REQUEST['nom']) ? $_REQUEST['nom'] : NULL;
 $salle['capacite'] = isset($_REQUEST['capacite']) ? intval($_REQUEST['capacite']) : NULL;
 //
 $ville = array();
-$ville['id'] = isset($_POST['ville']) ? intval($_POST['ville']) : NULL;
+$ville['id'] = isset($_REQUEST['ville']) ? intval($_REQUEST['ville']) : NULL;
 //
 
 /** FIN RÉCUP CLIENT **/
