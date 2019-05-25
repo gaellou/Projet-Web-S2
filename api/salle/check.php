@@ -48,10 +48,10 @@ function checkVenue_UPDATE($salle, $conn)
 function checkVenue_SEARCH($salle)
 {
 	$valide = true;
-	if( isset($salle['capacite_moins']) )
-		$valide &= is_int($salle['capacite_moins']);
-	if( isset($salle['capacite_plus']) )
-		$valide &= is_int($salle['capacite_plus']);
+	if( isset($salle['capacite_min']) )
+		$valide &= is_int($salle['capacite_min']);
+	if( isset($salle['capacite_max']) )
+		$valide &= is_int($salle['capacite_max']);
 	if( isset($salle['nom']) )
 		$valide &= is_string($salle['nom']);
 	return $valide;

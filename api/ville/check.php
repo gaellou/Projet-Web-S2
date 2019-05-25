@@ -46,10 +46,10 @@ function checkTown_SEARCH($ville)
 	$valide = true;
 	if( isset($ville['nom']) )
 		$valide &= is_string($ville['nom']);
-	if( isset($ville['code_moins']) )
-		$valide &= is_int($ville['code_moins']);
-	if( isset($ville['code_plus']) )
-		$valide &= is_int($ville['code_plus']);
+	if( isset($ville['code_min']) )
+		$valide &= is_int($ville['code_min']);
+	if( isset($ville['code_max']) )
+		$valide &= is_int($ville['code_max']);
 	return $valide;
 }
 

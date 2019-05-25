@@ -19,8 +19,8 @@ if( $method !== "get"  || !isset($_GET) )
 //
 $ville = array();
 $ville['nom'] = isset($_GET['nom']) ? $_GET['nom'] : NULL;
-$ville['code_moins'] = isset($_GET['code_moins']) ? intval($_GET['code_moins']) : NULL;
-$ville['code_plus'] = isset($_GET['code_plus']) ? intval($_GET['code_plus']) : NULL;
+$ville['code_min'] = isset($_GET['code_min']) ? intval($_GET['code_min']) : NULL;
+$ville['code_max'] = isset($_GET['code_max']) ? intval($_GET['code_max']) : NULL;
 //
 
 
