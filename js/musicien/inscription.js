@@ -26,19 +26,25 @@ document.ready( () => {
 						for(var item3 in obj[item][item2]){
 							var ville = obj[item][item2][item3];
 							if(item3=="nom"){
+								var AUnNom = (ville != "" || ville!=null);
 								tabNomsVilles.push(ville);
-								var list = document.createElement("option");
-								list.value=ville;
-								var itmText = document.createTextNode(ville);
-								list.appendChild(itmText);
-								villes.appendChild(list);
+								
+								var valeur = ville;
 							}
 							if(item3=="id"){
 								tabIdVilles.push(ville);
 							}
 							if(item3=='code_postal'){
 								tabCodesPostauxVilles.push(ville);
+								valeur = valeur.concat(" ("+ville+")");
 							}
+						}
+						if(AUnNom){
+								var list = document.createElement("option");
+								list.value = valeur;
+								var itmText = document.createTextNode(valeur);
+								list.appendChild(itmText);
+								villes.appendChild(list);
 						}
 					}				
 				}
@@ -56,15 +62,11 @@ document.ready( () => {
 	fetch(HOST_PATH+"api/genre/read.php") // à corriger si cela ne fonctionne pas
 		.then( response => response.json())
 		.then( data => {
-			//let genres = document.getElementById('list-genre');
 			obj = data;
 			for(var item in obj){
 				if(item !="nombre"){
-					//console.log(item);
 					for(var item2 in obj[item]){
-						//console.log(obj[item][item2]);
 						for(var item3 in obj[item][item2]){
-							//console.log(item3);
 							var genre = obj[item][item2][item3];
 							if(item3=="nom"){
 								tabNomsGenres.push(genre);
@@ -103,7 +105,6 @@ de la valeur checked de la checkbox dans la liste d'instruments.*/
 function functDisplay(){
 	var ul = document.getElementById("list-instrument");
 	var li = ul.getElementsByTagName("li");
-	//console.log(li);
 	
 	for(var i=0; i<li.length; ++i){
 		var input = li[i].firstElementChild;
@@ -128,11 +129,8 @@ document.ready( () => {
 			obj = data;
 			for(var item in obj){
 				if(item !="nombre"){
-					//console.log(item);
 					for(var item2 in obj[item]){
-						//console.log(obj[item][item2]);
 						for(var item3 in obj[item][item2]){
-							//console.log(item3);
 							var instrument = obj[item][item2][item3];
 							if(item3=="nom"){
 								tabNomsInstruments.push(instrument);
@@ -147,12 +145,10 @@ document.ready( () => {
 								label.htmlFor = "input-checkbox-" + instrument.toLowerCase();
 								label.innerHTML = instrument;
 								
-								//console.log(checkbox);
 								
 								let select = document.createElement("select");
 								select.id = "list-annees";
 								select.name = "depuis";
-								//select.innerHTML = ",&nbsp depuis :";
 								select.style="display:none";
 								
 								for(var i=2020; i>=1900; i--){
@@ -164,12 +160,7 @@ document.ready( () => {
 									select.appendChild(option);
 								}
 								
-								/*functDisplay = function(){
-									if(checkbox.checked==true)
-										select.style.display= "block";
-									else
-										select.style.display = "none";
-								};*/
+				
 								
 								checkbox.addEventListener("click",functDisplay,true);
 								
@@ -201,7 +192,7 @@ function ProposerGenre(button,compteur){
 		let proposerGenre = document.getElementById('TxtProposeGenre');
 		
 		let label1 = document.createElement("label");
-		label1.innerHTML = " Genre "+compteur + " : ";
+		label1.innerHTML = "<br> Genre "+compteur + " : ";
 		proposerGenre.appendChild(label1);
 		
 		var text = document.createElement("input");
@@ -210,14 +201,12 @@ function ProposerGenre(button,compteur){
 		text.id = "ajouterGenre"+compteur;
 		
 		proposerGenre.appendChild(text);
-		//console.log(button);
 		document.getElementById("genres").removeChild(button);//au clic, le bouton disparait !
 		
 		button = document.createElement("button");
 		button.id ="button-proposerNouveau-genre";
 		button.innerHTML = "Proposer un autre genre !";
 		document.getElementById("genres").appendChild(button);
-		//console.log(compteur);
 		
 		compteur++;
 		
@@ -236,7 +225,7 @@ function ProposerVille(button){
 		let proposerVille = document.getElementById('TxtProposeVille');
 		
 		let label1 = document.createElement("label");
-		label1.innerHTML = " Nom de ta ville: ";
+		label1.innerHTML = "<br> Nom de ta ville: ";
 		proposerVille.appendChild(label1);
 		
 		var nom = document.createElement("input");
@@ -246,7 +235,7 @@ function ProposerVille(button){
 		proposerVille.appendChild(nom);
 		
 		let label2 = document.createElement("label");
-		label2.innerHTML = " et son Code Postal : ";
+		label2.innerHTML = "<br> et son Code Postal : ";
 		proposerVille.appendChild(label2);
 		
 		var codePostal = document.createElement("input");
@@ -272,7 +261,7 @@ function ProposerInstrument(button,compteur){
 		let proposerInstrument = document.getElementById('TxtProposeInstrument');
 		
 		let label1 = document.createElement("label");
-		label1.innerHTML = " Instrument "+compteur + " : ";
+		label1.innerHTML = "<br> Instrument "+compteur + " : ";
 		proposerInstrument.appendChild(label1);
 		
 		var text = document.createElement("input");
@@ -281,7 +270,6 @@ function ProposerInstrument(button,compteur){
 		text.id = "ajouterInstrument"+compteur;
 		
 		proposerInstrument.appendChild(text);
-		//console.log(button);
 		document.getElementById("instruments").removeChild(button);//au clic, le bouton disparait !
 		
 		let label=document.createElement("label");
@@ -304,9 +292,7 @@ function ProposerInstrument(button,compteur){
 		button = document.createElement("button");
 		button.id ="button-proposerNouvel-instrument";
 		button.innerHTML = "Proposer un autre instrument !";
-		
-		//console.log(compteur);
-		
+				
 		document.getElementById("instruments").appendChild(button);
 		compteur++;
 		
@@ -317,38 +303,6 @@ function ProposerInstrument(button,compteur){
 var compteurInstruments = 1;
 const buttonProposerInstrument = document.getElementById('button-proposer-instrument');
 ProposerInstrument(buttonProposerInstrument,compteurInstruments);
-
-/*buttonProposerInstrument.onclick = event => {
-	event.preventDefault();
-	
-	let proposerInstrument = document.getElementById('TxtProposeInstrument');
-	
-	var text = document.createElement("input");
-	text.type = "text";
-	text.name = "proposeInstrument";
-	text.id = "ajouterInstrument";
-
-	proposerInstrument.appendChild(text);
-	document.getElementById("instruments").removeChild(buttonProposerInstrument);//au clic, le bouton disparait !
-};*/
-
-
-
-/*
-checkbox = document.createElement("input");
-checkbox.type = "checkbox";
-checkbox.name = "genre";
-checkbox.value = "propose";
-checkbox.id = "input-checkbox-propose";
-
-let label = document.createElement("label")
-label.htmlFor = "input-checkbox-propose";
-label.innerHTML = "Proposer un Genre";
-let li  = document.createElement("li");
-li.appendChild(checkbox);
-li.appendChild(label);
-genres.appendChild(li);
-*/
 
 function DeleteSpacesBeforeAndAfter(chaine){
 	while(chaine.substr(chaine.length-1)==" ")
@@ -389,7 +343,6 @@ document.getElementById('button-signIn').onclick = event => {
 			}	
 		}	
 		if(!contains && nomGenre!=""){	
-				//console.log(document.getElementById('TxtProposeGenre').childNodes[0]);
 				var parametrePost = "nom=" + nomGenre;
 				
 				console.log(parametrePost);
@@ -419,8 +372,6 @@ document.getElementById('button-signIn').onclick = event => {
 			
 	}
 	
-	console.log(tabNomsGenres);
-	console.log(tabIdGenres);
 
 	var stringIdGenres="";
 	var ul = document.getElementById("list-genre");
@@ -447,7 +398,6 @@ document.getElementById('button-signIn').onclick = event => {
 	/*À partir de maintenant on a notre belle chaine de caractères (sans doublon) des 
 	  identifiants des genres à envoyer. */
 	
-	//console.log(stringIdGenres);
 	
 	/*
 	On ajoute la nouvelle ville à la base de Données (ou non si elle existe déjà ou est vide)
@@ -456,7 +406,6 @@ document.getElementById('button-signIn').onclick = event => {
 	var stringIdVille = "";
 	
 	if(document.getElementById('TxtProposeVille').childNodes.length !=0){
-		
 		var nomVille = document.getElementById('TxtProposeVille').childNodes[1].value;
 		var codePostalVille = document.getElementById('TxtProposeVille').childNodes[3].value;
 	
@@ -467,13 +416,13 @@ document.getElementById('button-signIn').onclick = event => {
 		nomVille = DeleteSpacesBeforeAndAfter(nomVille);
 		codePostalVille = DeleteSpacesBeforeAndAfter(codePostalVille);
 		
-		console.log("nom : " + nomVille + ".");
-		console.log("code : " + codePostalVille + ".");
+		//console.log("nom : " + nomVille + ".");
+		//console.log("code : " + codePostalVille + ".");
 		
 		var contains=false;
 		
 		for(var j=0; j<tabNomsVilles.length-1; j++){
-			if(nomVille == tabNomsVilles[j] && codePostalVille == tabCodesPostauxVilles[j]){
+			if(nomVille == tabNomsVilles[j] && (codePostalVille == tabCodesPostauxVilles[j] || codePostalVille=="")){
 				stringIdVille = stringIdVille.concat(tabIdVilles[j]);
 				contains=true;
 			}
@@ -481,18 +430,18 @@ document.getElementById('button-signIn').onclick = event => {
 		
 		if(!contains && nomVille!=""){
 							
-			var parametrePost = "nom=" + nomVille;
+			var parametrePost = "nom=" + nomVille + "&code_postal="+codePostalVille;
 			
-			if(codePostalVille!="")
+			/*if(codePostalVille!="")
 				parametrePost = parametrePost.concat("&code_postal="+codePostalVille);
-			
-			console.log(parametrePost);
+			*/
+			//console.log(parametrePost);
 			
 			var request = new XMLHttpRequest();
 			var url = HOST_PATH+'api/ville/create.php';
 				
 			request.onreadystatechange = function(){
-				console.log(request.readyState, request.status);
+				//console.log(request.readyState, request.status);
 				if(request.readyState == 4 && request.status == 200){
 					var response = JSON.parse(request.responseText);
 					tabNomsVilles.push(response.ville.nom);
@@ -514,7 +463,7 @@ document.getElementById('button-signIn').onclick = event => {
 	else{
 		if(form.ville.value!="vide"){
 			for(var i=0; i<tabNomsVilles.length; i++){
-				if(tabNomsVilles[i]==form.ville.value){
+				if(tabNomsVilles[i] +" ("+tabCodesPostauxVilles[i]+")" ==form.ville.value){
 					stringIdVille = tabIdVilles[i];
 					break;
 				}
@@ -522,27 +471,136 @@ document.getElementById('button-signIn').onclick = event => {
 		}
 	}
 	
-	if(stringIdVille == "")//peut-être inutile.
+	/*if(stringIdVille == "")//peut-être inutile.
 		stringIdVille = null;
-	
-	console.log(stringIdVille);
-	
-	let params = {};
-	
-	/*if(form.prenom.value) params['prenom'] = form.prenom.value;
-	if(form.nom.value) params['nom'] = form.nom.value;
-	if(form.dateNaissance.value) params['date-naissance'] = form.date-naissance.value;
-	if(form.genre.value) params['genre'] = form.genre.value;
-	if(form.ville.value) params['ville'] = form.ville.value;
-	if(form.intrument.value) params['ville'] = form.instrument.value;
-	if(form.list-annee.value) params['annee_debut'] = form.list-annee.value;
-	
-	console.log(params);
 	*/
-	var stringToSend = "";
 	
-	/*for(int i=0; i<params.length; i++){
+	/*À ce moment on a tout ce qui concerne les genres et les villes. Les chaines avec
+	 les id sont prêtes à être envoyées*/
+	
+	
+
+	
+	
+	
+	var nbInstrumentsSelected=0;
+	var stringIdInstrumentsText = "";
+	var stringAnneesDebutText = "";
+	var firstElementSringIdInstrumentsText="";
+	/*
+	On ajoute tous les instruments à la base de Données (ou non s'ils existent déjà ou sont vides)
+	*/
+	var numInstrument = 0;
+	for(var i=2; i<document.getElementById('TxtProposeInstrument').childNodes.length; i=i+4){
+		numInstrument ++;
+		var nomInstrument = document.getElementById('TxtProposeInstrument').childNodes[i].value;
+		var anneeDebut = document.getElementById('TxtProposeInstrument').childNodes[i+2].value;
 		
-	}*/
+		/*Si le genre tapé contient des espaces à la fin ou au début, on lui enlève*/
+		nomInstrument = DeleteSpacesBeforeAndAfter(nomInstrument);	
+		
+		
+		var contains=false;
+		for(var j=0; j<tabNomsInstruments.length-1; j++){
+			if(nomInstrument == tabNomsInstruments[j]){
+				if(stringIdInstrumentsText==""){
+					firstElementSringIdInstrumentsText=firstElementSringIdInstrumentsText.concat(tabIdInstruments[j]);
+				}	
+				console.log(firstElementSringIdInstrumentsText);
+				stringIdInstrumentsText=stringIdInstrumentsText.concat(tabIdInstruments[j] + ",");
+				stringAnneesDebutText = stringAnneesDebutText.concat(anneeDebut.toString()+ ",");
+				nbInstrumentsSelected++;
+				contains=true;
+			}	
+		}	
+		if(!contains && nomInstrument!=""){	
+				var parametrePost = "nom=" + nomInstrument;
+				
+				console.log(parametrePost);
+				
+				var request = new XMLHttpRequest();
+				var url = HOST_PATH+'api/instrument/create.php';
+				
+				request.onreadystatechange = function(){
+					if(request.readyState == 4 && request.status == 200){
+						var response = JSON.parse(request.responseText);
+						tabNomsInstruments.push(response.instrument.nom);
+						tabIdInstruments.push(response.instrument.id.toString());
+						nbInstrumentsSelected++;
+						if(stringIdInstrumentsText=="")
+							firstElementSringIdInstrumentsText.concat(tabIdInstruments[j]);
+						stringIdInstrumentsText=stringIdInstrumentsText.concat(response.instrument.id.toString() + ",");
+						stringAnneesDebutText = stringAnneesDebutText.concat(anneeDebut.toString()+ ",");
+					}
+				}
+				request.open('POST', url, false);//On met false (synchrone) pour que les requêtes se fassent dans l'ordre.
+				request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				request.send(parametrePost);			
+		}
+		else if(nomInstrument=="")
+			console.log("L'instrument "+(numInstrument)+" est vide.");
+		else
+			console.log("L'instrument "+(numInstrument)+" est déjà dans la liste.");
+
+	}
+
+	var stringIdInstruments="";
+	var stringAnneesDebut="";
+	var ul = document.getElementById("list-instrument");
+	var liInstruments = ul.getElementsByTagName("li");
+	/*La prochaine boucle for va permettre de créer la chaine contenant les id des instruments cochés.
+	  Ce sera stringIdInstruments.
+	*/
+	for(var i=0; i<liInstruments.length; ++i){
+		if(liInstruments[i].firstElementChild.checked){
+			nbInstrumentsSelected++;
+			for(var j=0; j<tabNomsInstruments.length; j++){
+				if(tabNomsInstruments[j]==liInstruments[i].firstElementChild.value && !(stringIdInstrumentsText.includes(','+tabIdInstruments[j]+',')) && firstElementSringIdInstrumentsText!=tabIdInstruments[j]){
+					stringIdInstruments=stringIdInstruments.concat(tabIdInstruments[j] + ",");
+					stringAnneesDebut=stringAnneesDebut.concat(liInstruments[i].childNodes[2].value + ",");//On met dans la chaine de caractère, les années de début de pratique.
+				}
+			}
+		}
+	}
+	
+	stringIdInstruments=stringIdInstruments.concat(stringIdInstrumentsText);
+	stringAnneesDebut=stringAnneesDebut.concat(stringAnneesDebutText);
+	
+	if(nbInstrumentsSelected>0){//On retire la dernière virgule des chaines de caractères.
+		stringIdInstruments=stringIdInstruments.slice(0,stringIdInstruments.length-1);
+		stringAnneesDebut=stringAnneesDebut.slice(0,stringAnneesDebut.length-1);
+	}
+	
+	/*Maintenant on a les strings à envoyer pour créer noter musicien. On n'a plus qu'à faire la requête*/
+	
+	let params = "";
+	
+	if(form.prenom.value) params=params.concat("prenom="+form.prenom.value+"&");
+	if(form.nom.value) params=params.concat("nom="+form.nom.value+"&");
+	if(form.dateNaissance.value) params=params.concat("date_naissance="+form.dateNaissance.value+"&");
+	if(stringIdGenres!="") params=params.concat("genres="+stringIdGenres+"&");
+	if(stringIdVille!="") params=params.concat("ville="+stringIdVille+"&");
+	if(stringIdInstruments!="") params=params.concat("instruments="+stringIdInstruments+"&");
+	if(stringAnneesDebut) params=params.concat("annee_debut="+stringAnneesDebut+"&");
+	
+	
+	if(params.length!=0)
+		params=params.slice(0,params.length-1);
+		
+	console.log(params);
+	
+	let urlCreateMusicien = new URL("api/musicien/create.php", HOST_PATH);
+	
+	var requestCreateMusicien = new XMLHttpRequest();
+	
+	requestCreateMusicien.onreadystatechange = function(){
+		if(requestCreateMusicien.readyState == 4 && requestCreateMusicien.status == 200){
+			var response = JSON.parse(requestCreateMusicien.responseText);
+			console.log(response);
+		}
+	}
+	requestCreateMusicien.open('POST', urlCreateMusicien, true);
+	requestCreateMusicien.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	requestCreateMusicien.send(params);
 	
 };

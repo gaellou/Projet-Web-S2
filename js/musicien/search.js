@@ -11,6 +11,7 @@ Document.prototype.ready = callback => {
 };
 
 var tabNomsVilles = [];
+var tabCodesPostauxVilles = [];
 var tabIdVilles = [];
 
 document.ready( () => {
@@ -28,17 +29,25 @@ document.ready( () => {
 							//console.log(item3);
 							var ville = obj[item][item2][item3];
 							if(item3=="nom"){
+								var AUnNom = (ville != "" || ville!=null);
 								tabNomsVilles.push(ville);
-								var list = document.createElement("option");
-								list.value=ville;
-								var itmText = document.createTextNode(ville);
-								list.appendChild(itmText);
-								villes.appendChild(list);
-		
+								
+								var valeur = ville;
 							}
 							if(item3=="id"){
 								tabIdVilles.push(ville);
 							}
+							if(item3=='code_postal'){
+								tabCodesPostauxVilles.push(ville);
+								valeur = valeur.concat(" ("+ville+")");
+							}
+						}
+						if(AUnNom){
+								var list = document.createElement("option");
+								list.value = valeur;
+								var itmText = document.createTextNode(valeur);
+								list.appendChild(itmText);
+								villes.appendChild(list);
 						}
 					}				
 				}
@@ -152,13 +161,13 @@ document.getElementById('button-search').onclick = event => {
 	
 	const form = document.getElementById('form-musicien');
 	
-	let params = {};
+	let params ={};
 	
 	var idVille="";
 	console.log(form.ville.value);
 	if(form.ville.value!="nul"){ /* !!! ICI C'EST SÛREMENT vide À LA PLACE DE nul*/
 		for(var i=0; i<tabNomsVilles.length; i++){
-			if(tabNomsVilles[i]==form.ville.value){
+			if(tabNomsVilles[i] +" ("+tabCodesPostauxVilles[i]+")" ==form.ville.value){
 				idVille = tabIdVilles[i];
 				break;
 			}
