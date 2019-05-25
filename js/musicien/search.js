@@ -1,10 +1,3 @@
-/*const searchFirstname = document.getElementById('search_firstname');
-const searchLastname = document.getElementById('search_lastname');
-const searchTown = document.getElementById('search_town');
-
-const searchGenres = document.getElementById('search_genres[]');
-const searchInstruments = document.getElementById('search_instruments[]');*/
-
 const HOST_PATH = "https://perso-etudiant.u-pem.fr/~pthiel/imac_toile_2/";
 
 Document.prototype.ready = callback => {
@@ -127,7 +120,7 @@ document.ready( () => {
 								var checkbox = document.createElement("input");
 								checkbox.type = "checkbox";
 								checkbox.name = "instrument";
-								checkbox.value = instrument
+								checkbox.value = instrument;
 								checkbox.id = "input-checkbox-" + instrument.toLowerCase();
 								
 								let label = document.createElement("label")
@@ -163,7 +156,7 @@ document.getElementById('button-search').onclick = event => {
 	
 	var idVille="";
 	console.log(form.ville.value);
-	if(form.ville.value!="nul"){
+	if(form.ville.value!="nul"){ /* !!! ICI C'EST SÛREMENT vide À LA PLACE DE nul*/
 		for(var i=0; i<tabNomsVilles.length; i++){
 			if(tabNomsVilles[i]==form.ville.value){
 				idVille = tabIdVilles[i];
@@ -262,21 +255,43 @@ document.getElementById('button-search').onclick = event => {
 			console.log(data);
 			
 			if(data.nombre == 0)
-				resultat.innerHTML = "Aucun musicien ne correspond à votre recherche.";
+				resultat.innerHTML = "Il n'y a aucun musicien qui correspond à votre recherche.";
 			
 			else if(data.nombre == 1)
 				resultat.innerHTML = "L'unique musicien correspondant à votre recherche est : <br><br> - "+data[0].musicien.prenom+" "+data[0].musicien.nom+" ("+data[0].musicien.id+")" ;
 				
 			
 			else{
-				resultat.innerHTML = "Les musiciens correspondant à votre recherche sont : <br><br>";
+				resultat.innerHTML = "Les musiciens correspondants à votre recherche sont : <br><br>";
 			
 				for(var i=0; i<data.nombre; i++){
 					console.log(data[i].musicien);
-				 	resultat.innerHTML+="<br> - "+data[i].musicien.prenom+" "+ data[i].musicien.nom+ " ("+data[i].musicien.id+")<br>";
+				 	resultat.innerHTML+="<br> - "+data[i].musicien.prenom+" "+ data[i].musicien.nom+"<br>";
+				 	
+				 	if(data[i].genres.length == 0) resultat.innerHTML += "&nbsp &nbsp (Aucun genre précisé)";
+				 	else{
+				 		/* On met un s ou non selon le nombre de genre*/
+				 		(data[i].genres.length<2) ? resultat.innerHTML += "&nbsp &nbsp	Genre :" : resultat.innerHTML += "&nbsp &nbsp	Genres :";
+				 		for(var j=0; j<data[i].genres.length; j++){
+				 			resultat.innerHTML += "<br>&nbsp &nbsp &nbsp - " + data[i].genres[j].nom;
+				 			console.log("genres : ",data[i].genres);
+				 		}
+				 	}
+				 	resultat.innerHTML += "<br>";
+					
+					if(data[i].instruments.length == 0) resultat.innerHTML += "&nbsp &nbsp (Aucun instrument précisé)";
+					else{
+				 		/* On met un s ou non selon le nombre d'instruments*/
+				 		(data[i].instruments.length<2) ? resultat.innerHTML += "&nbsp &nbsp	Instrument :" : resultat.innerHTML += "&nbsp &nbsp	Instruments :";
+				 		for(var j=0; j<data[i].instruments.length; j++){
+				 			resultat.innerHTML += "<br>&nbsp &nbsp &nbsp - " + data[i].instruments[j].nom;
+				 			console.log("genres : ",data[i].instruments);
+				 		}
+				 	}
+				 	resultat.innerHTML += "<br>";
 				}
 			}
 			
-			/* -- TODO - à compléter */ } )
+			 } )
 		.catch( error => { console.log(error)} );
 };
