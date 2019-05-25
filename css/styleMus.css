@@ -101,11 +101,3 @@ button#button-search:hover
   	color : #fff;
   	transition: 0.5s;
 }
-
-.container input:checked ~ .checkmark {
-  background-color: #2196F3;
-}
-
-.select-selected {
-  background-color: #384c80 ;
-}
