@@ -19,10 +19,11 @@ $conn = MyPDO::getInstance();
 require_once '../data/commun.php';
 if( !isset($_GET["id"]) || !checkID(intval($_GET["id"]), 'id', 'Concert', $conn) )
 {
-	$message = array( "message" => "Identifiant incorrect ou absent." );
+	$message = array( "message" => "Identifiant incorrect ou absent.",
+						'id' => $_GET['id']);
 	echo json_encode($message);
 
-	header(http_response_code(406));
+	header(http_response_code(404));
 	exit();
 }
 
@@ -35,10 +36,10 @@ $resultat = selectGig($id, $conn);
 
 if( !$resultat )
 {
-	$message = array( "message" => "Erreur, concert à l'id {$id} non trouvé (n'est pas censé se produire)." );
+	$message = array( "message" => "Erreur, concert à l'id {$id} non trouvé." );
 	echo json_encode($message);
 
-	header(http_response_code(406));
+	header(http_response_code(404));
 	exit();
 }
 

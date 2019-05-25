@@ -12,7 +12,8 @@ function selectAllMusicians($conn)
 		SELECT mu.id AS 'id_mu', mu.nom_musicien AS 'nom_mu', mu.prenom_musicien AS 'prenom_mu', mu.date_naissance AS 'date_naissance',
 			 v.id AS 'id_ville', v.nom_ville AS 'nom_ville', 
 			 g.id AS 'id_genre', g.nom_genre AS 'nom_genre', 
-			 i.id AS 'id_instrument', i.nom_instrument AS 'nom_instrument', p.annee_debut AS 'annee_debut'
+			 i.id AS 'id_instrument', i.nom_instrument AS 'nom_instrument',
+			 p.id AS 'id_pratique', p.annee_debut AS 'annee_debut'
 		FROM Musicien AS mu
 		INNER JOIN Ville AS v ON v.id = mu.id_ville
 		INNER JOIN Aime AS a ON a.id_musicien = mu.id
@@ -71,6 +72,7 @@ SQL
 			$resultat[$id]['instruments'][(int)$nbInstruments[$id]]['id'] = intval($musicien['id_instrument']);
 			$resultat[$id]['instruments'][(int)$nbInstruments[$id]]['nom'] = $musicien['nom_instrument'];
 			$resultat[$id]['instruments'][(int)$nbInstruments[$id]]['annee_debut'] = $musicien['annee_debut'];
+			$resultat[$id]['instruments'][(int)$nbInstruments[$id]]['id_pratique'] = intval($musicien['id_pratique']);
 			$nbInstruments[$id] += 1;
 
 		}

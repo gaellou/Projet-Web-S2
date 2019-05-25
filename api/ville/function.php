@@ -71,14 +71,14 @@ function searchTown($ville, $conn)
 		$req_Ville_WHERE = $req_Ville_WHERE.' '.$req_Nom_texte;
 	}
 	//par code postal, entre deux valeurs
-	if( isset($ville['code_moins']) )
+	if( isset($ville['code_min']) )
 	{
-		$req_Moins_texte = "AND `code_postal` < {$ville['code_moins']}";
+		$req_Moins_texte = "AND `code_postal` >= {$ville['code_min']}";
 		$req_Ville_WHERE = $req_Ville_WHERE.' '.$req_Moins_texte;
 	}
-	if( isset($ville['code_plus']) )
+	if( isset($ville['code_max']) )
 	{
-		$req_Plus_texte = "AND `code_postal` > {$ville['code_plus']}";
+		$req_Plus_texte = "AND `code_postal` <= {$ville['code_max']}";
 		$req_Ville_WHERE = $req_Ville_WHERE.' '.$req_Plus_texte;
 	}
 

@@ -33,29 +33,27 @@ function deleteVenueFromTown($idVille, $conn)
 	require_once "../data/MyPDO.musiciens-groupes.include.php";
 
 
-	$crea_declencheur = $conn->prepare(<<<SQL
-		CREATE TRIGGER `decl_Salle`
-			BEFORE DELETE ON `Salle` FOR EACH ROW
-					DELETE FROM `Concert`
-						WHERE `id` = OLD.`id`
-SQL
-	);
-
 	$suppr_Salle = $conn->prepare(<<<SQL
 		DELETE FROM `Salle`
 			WHERE `id_ville` = {$idVille}
 SQL
 	);
 
-
-	$suppr_declencheur = $conn->prepare(<<<SQL
-		DROP TRIGGER IF EXISTS `decl_Salle`;
+	$suppr_Concert = $conn->prepare(<<<SQL
+		DELETE FROM Concert
+		WHERE `id` IN 
+			( SELECT cid FROM 
+				( SELECT DISTINCT c2.`id` AS cid
+					FROM Concert AS c2
+						JOIN Salle AS s ON c2.`id_salle` = s.`id` 
+						JOIN Ville AS v ON s.`id_ville` = v.`id` 
+							WHERE v.`id` = {$idVille}
+				) AS c3
+			) 
 SQL
-);
+	);
 
-	$crea_declencheur->execute();
-
-	$suppr_declencheur->execute();
+	$suppr_Concert->execute();
 
 	$suppr_Salle->execute();
 
@@ -143,14 +141,14 @@ function searchVenue($salle, $ville, $conn)
 		$req_Salle_WHERE = $req_Salle_WHERE.' '.$req_Nom_texte;
 	}
 	//par capacité
-	if( isset($salle['capacite_moins']) )
+	if( isset($salle['capacite_min']) )
 	{
-		$req_Moins_texte = "AND `capacite` < {$salle['capacite_moins']}";
+		$req_Moins_texte = "AND `capacite` >= {$salle['capacite_min']}";
 		$req_Salle_WHERE = $req_Salle_WHERE.' '.$req_Moins_texte;
 	}
-	if( isset($salle['capacite_plus']) )
+	if( isset($salle['capacite_max']) )
 	{
-		$req_Plus_texte = "AND `capacite` > {$salle['capacite_plus']}";
+		$req_Plus_texte = "AND `capacite` <= {$salle['capacite_max']}";
 		$req_Salle_WHERE = $req_Salle_WHERE.' '.$req_Plus_texte;
 	}
 	//par ville

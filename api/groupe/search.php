@@ -81,7 +81,7 @@ $conn = MyPDO::getInstance();
 /** VÉRIF **/
 if( !checkSearch($groupe, $genre, $musiciens, $instruments, $conn) )
 {
-	header(http_response_code(406));
+	header(http_response_code(404));
 	$message = array( "message" => "Arguments inacceptables." );
 	echo json_encode($message);
 	exit();

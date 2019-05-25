@@ -20,11 +20,11 @@ if( $method !== "get"  || !isset($_GET) )
 
 // on cherche les capacités dans une fourchette de valeurs.
 $salle['nom'] = isset($_GET['nom']) ? $_GET['nom'] : NULL;
-$salle['capacite_moins'] = isset($_GET['capacite_moins']) ? intval($_GET['capacite_moins']) : NULL;
-$salle['capacite_plus'] = isset($_GET['capacite_plus']) ? intval($_GET['capacite_plus']) : NULL;
+$salle['capacite_min'] = isset($_GET['capacite_min']) ? intval($_GET['capacite_min']) : NULL;
+$salle['capacite_max'] = isset($_GET['capacite_max']) ? intval($_GET['capacite_max']) : NULL;
 //
 $ville = array();
-$ville['id'] = isset($_POST['ville']) ? intval($_POST['ville']) : NULL;
+$ville['id'] = isset($_GET['ville']) ? intval($_GET['ville']) : NULL;
 //
 
 /** FIN RÉCUP CLIENT **/
@@ -41,7 +41,7 @@ if( !checkSearch($salle, $ville, $conn) )
 {
 	$message = array( "message" => "Arguments incorrects ou absents." );
 	echo json_encode($message);
-	header(http_response_code(406));
+	header(http_response_code(404));
 	exit();
 }
 

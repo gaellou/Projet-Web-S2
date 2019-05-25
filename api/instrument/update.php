@@ -26,9 +26,10 @@ $conn = MyPDO::getInstance();
 require_once '../data/commun.php';
 if( !isset($_REQUEST["id"]) || !checkID(intval($_REQUEST["id"]), 'id', 'Instrument', $conn) )
 {
-	header(http_response_code(406));
-	$message = array( "message" => "Identifiant absent ou incorrect." );
+	$message = array( "message" => "Identifiant absent ou incorrect.",
+						'id' => $_REQUEST['id']);
 	echo json_encode($message);
+	header(http_response_code(404));
 	exit();
 }
 
@@ -47,7 +48,7 @@ if( !checkPut($instrument) )
 {
 	$message = array( "message" => "Arguments incorrects ou absents." );
 	echo json_encode($message);
-	header(http_response_code(406));
+	header(http_response_code(404));
 	exit();
 }
 
