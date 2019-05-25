@@ -1,6 +1,5 @@
 const HOST_PATH = "https://perso-etudiant.u-pem.fr/~pthiel/imac_toile_2/";
 
-
 Document.prototype.ready = callback => {
 	if(callback && typeof callback === 'function') {
 		document.addEventListener("DOMContentLoaded", () =>  {
@@ -12,6 +11,7 @@ Document.prototype.ready = callback => {
 };
 
 var tabNomsVilles = [];
+var tabCodesPostauxVilles = [];
 var tabIdVilles = [];
 
 document.ready( () => {
@@ -35,6 +35,9 @@ document.ready( () => {
 							}
 							if(item3=="id"){
 								tabIdVilles.push(ville);
+							}
+							if(item3=='code_postal'){
+								tabCodesPostauxVilles.push(ville);
 							}
 						}
 					}				
@@ -85,7 +88,7 @@ document.ready( () => {
 								tabIdGenres.push(genre);
 							}
 						}
-					}				
+					}
 				}
 			}
 		})
@@ -144,7 +147,7 @@ document.ready( () => {
 								label.htmlFor = "input-checkbox-" + instrument.toLowerCase();
 								label.innerHTML = instrument;
 								
-								console.log(checkbox);
+								//console.log(checkbox);
 								
 								let select = document.createElement("select");
 								select.id = "list-annees";
@@ -207,14 +210,14 @@ function ProposerGenre(button,compteur){
 		text.id = "ajouterGenre"+compteur;
 		
 		proposerGenre.appendChild(text);
-		console.log(button);
+		//console.log(button);
 		document.getElementById("genres").removeChild(button);//au clic, le bouton disparait !
 		
 		button = document.createElement("button");
 		button.id ="button-proposerNouveau-genre";
 		button.innerHTML = "Proposer un autre genre !";
 		document.getElementById("genres").appendChild(button);
-		console.log(compteur);
+		//console.log(compteur);
 		
 		compteur++;
 		
@@ -278,7 +281,7 @@ function ProposerInstrument(button,compteur){
 		text.id = "ajouterInstrument"+compteur;
 		
 		proposerInstrument.appendChild(text);
-		console.log(button);
+		//console.log(button);
 		document.getElementById("instruments").removeChild(button);//au clic, le bouton disparait !
 		
 		let label=document.createElement("label");
@@ -302,7 +305,7 @@ function ProposerInstrument(button,compteur){
 		button.id ="button-proposerNouvel-instrument";
 		button.innerHTML = "Proposer un autre instrument !";
 		
-		console.log(compteur);
+		//console.log(compteur);
 		
 		document.getElementById("instruments").appendChild(button);
 		compteur++;
@@ -347,8 +350,182 @@ li.appendChild(label);
 genres.appendChild(li);
 */
 
+function DeleteSpacesBeforeAndAfter(chaine){
+	while(chaine.substr(chaine.length-1)==" ")
+			chaine = chaine.slice(0, chaine.length-1);
+	while(chaine.substr(0,1)==" ")
+			chaine = chaine.slice(1, chaine.length);
+	return chaine;
+}
+
 document.getElementById('button-signIn').onclick = event => {
 	event.preventDefault();
+	
+	const form = document.getElementById("form-inscription");
+		
+	var nbGenresSelected=0;
+	var stringIdGenresText="";
+	var firstElementSringIdGenresText="";
+	/*
+	On ajoute tous les genres à la base de Données (ou non s'ils existent déjà ou sont vides)
+	*/
+	for(var i=2; i<document.getElementById('TxtProposeGenre').childNodes.length; i=i+2){
+		
+		var nomGenre = document.getElementById('TxtProposeGenre').childNodes[i].value;
+		
+		/*Si le genre tapé contient des espaces à la fin ou au début, on lui enlève*/
+		nomGenre = DeleteSpacesBeforeAndAfter(nomGenre);	
+			
+		var contains=false;
+		for(var j=0; j<tabNomsGenres.length-1; j++){
+			if(nomGenre == tabNomsGenres[j]){
+				if(stringIdGenresText==""){
+					firstElementSringIdGenresText=firstElementSringIdGenresText.concat(tabIdGenres[j]);
+				}	
+				console.log(firstElementSringIdGenresText);
+				stringIdGenresText=stringIdGenresText.concat(tabIdGenres[j] + ",");
+				nbGenresSelected++;
+				contains=true;
+			}	
+		}	
+		if(!contains && nomGenre!=""){	
+				//console.log(document.getElementById('TxtProposeGenre').childNodes[0]);
+				var parametrePost = "nom=" + nomGenre;
+				
+				console.log(parametrePost);
+				
+				var request = new XMLHttpRequest();
+				var url = HOST_PATH+'api/genre/create.php';
+				
+				request.onreadystatechange = function(){
+					if(request.readyState == 4 && request.status == 200){
+						var response = JSON.parse(request.responseText);
+						tabNomsGenres.push(response.genre.nom);
+						tabIdGenres.push(response.genre.id.toString());
+						nbGenresSelected++;
+						if(stringIdGenresText=="")
+							firstElementSringIdGenresText.concat(tabIdGenres[j]);
+						stringIdGenresText=stringIdGenresText.concat(response.genre.id.toString() + ",");
+					}
+				}
+				request.open('POST', url, false);//On met false (synchrone) pour que les requêtes se fassent dans l'ordre.
+				request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				request.send(parametrePost);			
+		}
+		else if(nomGenre=="")
+			console.log("Le genre "+(i/2)+" est vide.");
+		else
+			console.log("Le genre "+(i/2)+" est déjà dans la liste.");
+			
+	}
+	
+	console.log(tabNomsGenres);
+	console.log(tabIdGenres);
+
+	var stringIdGenres="";
+	var ul = document.getElementById("list-genre");
+	var liGenres = ul.getElementsByTagName("li");
+	
+	/*La prochaine boucle for va permettre de créer la chaine contenant les id des genres cochés.
+	  Ce sera stringIdGenres.
+	*/
+	for(var i=0; i<liGenres.length; ++i){
+		if(liGenres[i].firstElementChild.checked){
+			nbGenresSelected++;
+			for(var j=0; j<tabNomsGenres.length; j++){
+				if(tabNomsGenres[j]==liGenres[i].firstElementChild.value && !(stringIdGenresText.includes(','+tabIdGenres[j]+',')) && firstElementSringIdGenresText!=tabIdGenres[j])
+					stringIdGenres=stringIdGenres.concat(tabIdGenres[j] + ",");
+			}
+		}
+	}
+	
+	stringIdGenres=stringIdGenres.concat(stringIdGenresText);
+	
+	if(nbGenresSelected>0)
+		stringIdGenres=stringIdGenres.slice(0,stringIdGenres.length-1);
+	
+	/*À partir de maintenant on a notre belle chaine de caractères (sans doublon) des 
+	  identifiants des genres à envoyer. */
+	
+	//console.log(stringIdGenres);
+	
+	/*
+	On ajoute la nouvelle ville à la base de Données (ou non si elle existe déjà ou est vide)
+	*/
+	
+	var stringIdVille = "";
+	
+	if(document.getElementById('TxtProposeVille').childNodes.length !=0){
+		
+		var nomVille = document.getElementById('TxtProposeVille').childNodes[1].value;
+		var codePostalVille = document.getElementById('TxtProposeVille').childNodes[3].value;
+	
+		/*On retire les espaces du début et de la fin de nomVille 
+		  et codePostalVille (bien que codePostalVille ne puisse pas
+		  dépasser cinq caractères)*/
+		  
+		nomVille = DeleteSpacesBeforeAndAfter(nomVille);
+		codePostalVille = DeleteSpacesBeforeAndAfter(codePostalVille);
+		
+		console.log("nom : " + nomVille + ".");
+		console.log("code : " + codePostalVille + ".");
+		
+		var contains=false;
+		
+		for(var j=0; j<tabNomsVilles.length-1; j++){
+			if(nomVille == tabNomsVilles[j] && codePostalVille == tabCodesPostauxVilles[j]){
+				stringIdVille = stringIdVille.concat(tabIdVilles[j]);
+				contains=true;
+			}
+		}
+		
+		if(!contains && nomVille!=""){
+							
+			var parametrePost = "nom=" + nomVille;
+			
+			if(codePostalVille!="")
+				parametrePost = parametrePost.concat("&code_postal="+codePostalVille);
+			
+			console.log(parametrePost);
+			
+			var request = new XMLHttpRequest();
+			var url = HOST_PATH+'api/ville/create.php';
+				
+			request.onreadystatechange = function(){
+				console.log(request.readyState, request.status);
+				if(request.readyState == 4 && request.status == 200){
+					var response = JSON.parse(request.responseText);
+					tabNomsVilles.push(response.ville.nom);
+					tabCodesPostauxVilles.push(response.ville.code_postal);
+					tabIdVilles.push(response.ville.id.toString());
+					stringIdVille = stringIdVille.concat(response.ville.id.toString());
+				}
+			}
+			request.open('POST', url, false);//On met false (synchrone) pour que les requêtes se fassent dans l'ordre.
+			request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			request.send(parametrePost);
+		}
+		else if(nomVille=="")
+			console.log("La ville est vide.");
+		else
+			console.log("La ville est déjà dans la liste.");
+	}
+	
+	else{
+		if(form.ville.value!="vide"){
+			for(var i=0; i<tabNomsVilles.length; i++){
+				if(tabNomsVilles[i]==form.ville.value){
+					stringIdVille = tabIdVilles[i];
+					break;
+				}
+			}
+		}
+	}
+	
+	if(stringIdVille == "")//peut-être inutile.
+		stringIdVille = null;
+	
+	console.log(stringIdVille);
 	
 	let params = {};
 	
