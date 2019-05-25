@@ -30,24 +30,6 @@ h2{
   	border-radius: 5px;
 }
 
-#textForm
-{
-	/*margin-left: 5px;*/
-}
-
-
-
-#TextInput
-{
-	top: 25%; left: 1%;
-} 
-
-a
-{	
-	color : white;
-}
-
-
 
 #button-search 
 {	
@@ -72,17 +54,14 @@ a
  	
 }
 
-.btn:active {
-  	transform: translate(0px, 5px);
-  	-webkit-transform: translate(0px, 5px);
-  	/*box-shadow: 0px 1px 0px 0px;*/
-}
 
 
-button-search:hover 
+
+button#button-search:hover 
 {
-  	background-color: #fff;
-  	color : #fff;
+  	background-color: #384c80;
+  	color: #fff;
+  	transition: 0.5s;
 }
 
 
@@ -104,14 +83,3 @@ input
   	text-align: center;
 }
 
-.textForm
-{
-	/*margin : auto;*/
-}
-
-
-
-.TextInput
-{
-	top: 25%; left: 1%;
-} 

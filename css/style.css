@@ -8,18 +8,10 @@ body {
      opacity: 0.8;
 	 /*background-color:  #323a45 ;*/
 }
-h1{
-	text-align: center;
-	/*text-shadow: -1px 0 black, 0 1px white;
-	 margin-bottom: 20px;
-	 border-radius: 20px;*/
-	 font-size: 7em;
-
-}
 
 .form-container {
   position : relative;
-  margin-top: 50px;
+  margin-top: 100px;
   margin-bottom: -900px;
   background-color: #fff;
   width: 400px;
@@ -29,21 +21,9 @@ h1{
   opacity: 0.8;
 }
 
-
-
-
-
-
-
-
-a
-{	
-	color : #fff;
-	opacity: 0.8;
-}
-
 #button-subscribe
 {	width: auto;
+	margin-top: 10px;
 	margin-bottom: 2%;
 	left: 0%;
 	text-align: center;
@@ -60,7 +40,6 @@ a
  	border-color: #fff;
  	align-content: center;
   	align-items: center;
-
 }
 
 #button-search 
@@ -84,18 +63,21 @@ a
 	display: flex;
 	flex-direction: column;
  	padding: 12px;
+ 	text-decoration: none;
 }
 
-.btn:active {
-  	transform: translate(0px, 5px);
-  	-webkit-transform: translate(0px, 5px);
-  	/*box-shadow: 0px 1px 0px 0px;*/
-}
-
-
-
-button:hover 
+button#button-subscribe:hover 
 {
-  	background-color: #384c80;
-  	color : #fff;
+  	background-color: #fff;
+  	border-color: #384c80;
+  	color : #384c80;
+  	transition: 0.5s;
+}
+
+button#button-search:hover 
+{
+  	background-color: #fff;
+  	border-color: #384c80;
+  	color : #384c80;
+  	transition: 0.5s;
 }

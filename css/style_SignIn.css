@@ -43,19 +43,35 @@ input
 
 }
 
-
+button{
+	width: 200px;
+	height: 50px;
+	position: relative;
+	outline: none;
+	border:2px solid #ddd;
+	border-radius: 5px;
+	margin: 15px;
+	margin-left: 35%;
+	font-size: 16px;
+	font-family: sans-serif,Helvetica;
+	color: gray;
+	align-content: center;
+  	align-items: center;
+  	text-align: center;
+}
 
 
 #button-signIn 
 {	
 	align-content: center;
   	align-items: center;
-	width: 300px;
+	width: 150px;
 	text-align: center;
 	margin: auto;
 	font-size: 22px;
 	margin-bottom: 20px;
 	margin-top: 20px;
+	padding-top: 10px;
 	position: relative;
 	display: inline-block;
 	display: flex;
@@ -68,14 +84,14 @@ input
  	border-radius: 5px;
 }
 
-.btn:active {
-  	transform: translate(0px, 5px);
-  	-webkit-transform: translate(0px, 5px);
-  	box-shadow: 0px 1px 0px 0px;
+button:hover{
+	background-color: #384c80 ;
+  	color : #fff;
+  	transition: 0.5s;
 }
-
-
-button:hover 
+button#button-signIn:hover 
 {
-  	background-color: #fff;
+  	background-color: #384c80 ;
+  	color : #fff;
+  	transition: 0.5s;
 }
