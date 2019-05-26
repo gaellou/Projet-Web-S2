@@ -591,16 +591,29 @@ document.getElementById('button-signIn').onclick = event => {
 	
 	let urlCreateMusicien = new URL("api/musicien/create.php", HOST_PATH);
 	
+	var inscriptionReussie = false;
+	
 	var requestCreateMusicien = new XMLHttpRequest();
 	
 	requestCreateMusicien.onreadystatechange = function(){
 		if(requestCreateMusicien.readyState == 4 && requestCreateMusicien.status == 200){
 			var response = JSON.parse(requestCreateMusicien.responseText);
 			console.log(response);
+			inscriptionReussie = true;
+		}
+		if(inscriptionReussie){
+			document.getElementById("result").innerHTML = "Bravo, bienvenue sur notre site ! Vous êtes à présent inscrit";
+		}
+		else{
+			document.getElementById("result").innerHTML = "Ooops... Il semble que l'inscription ait échoué... ";
+			document.getElementById("bouton_inscription").innerHTML = "Réessayer ";
 		}
 	}
 	requestCreateMusicien.open('POST', urlCreateMusicien, true);
 	requestCreateMusicien.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	requestCreateMusicien.send(params);
 	
+	console.log(inscriptionReussie);
+	document.getElementById("masque-opaque").style.display="block";
+		
 };
