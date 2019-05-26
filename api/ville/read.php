@@ -9,6 +9,7 @@ function selectAllTowns($conn)
 	$req = $conn->prepare(<<<SQL
 		SELECT v.id AS 'id_ville', v.nom_ville AS 'nom_ville', v.code_postal AS 'code_postal'
 		FROM Ville AS v
+		ORDER BY v.nom_ville
 SQL
 		);
 

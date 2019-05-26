@@ -15,6 +15,7 @@ function selectAllGigs($conn)
 		FROM Concert AS co
 		INNER JOIN Groupe AS gr ON gr.id = co.id_groupe
 		INNER JOIN Salle AS sa ON sa.id = co.id_salle
+		ORDER BY co.date_concert
 SQL
 		);
 

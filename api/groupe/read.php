@@ -19,6 +19,7 @@ function selectAllBands($conn)
 		LEFT JOIN Pratique AS p ON p.id = mb.id_pratique
 		LEFT JOIN Musicien AS m ON m.id = p.id_musicien
 		LEFT JOIN Instrument AS i ON i.id = p.id_instrument
+		ORDER BY gr.nom_groupe
 SQL
 		);
 

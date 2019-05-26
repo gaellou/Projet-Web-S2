@@ -9,6 +9,7 @@ function selectAllInstruments($conn)
 	$req = $conn->prepare(<<<SQL
 		SELECT i.id AS 'id_instrument', i.nom_instrument AS 'nom_instrument'
 		FROM Instrument AS i
+		ORDER BY i.nom_instrument
 SQL
 		);
 	$req->execute();

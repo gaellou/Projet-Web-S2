@@ -11,6 +11,7 @@ function selectAllVenues($conn)
 			sa.id_ville AS 'id_ville', v.nom_ville AS 'nom_ville', v.code_postal AS 'code_postal'
 		FROM Salle AS sa
 		INNER JOIN Ville AS v ON v.id = sa.id_ville
+		ORDER BY sa.nom_salle
 SQL
 		);
 

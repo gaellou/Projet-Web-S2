@@ -9,6 +9,7 @@ function selectAllGenres($conn)
 	$req = $conn->prepare(<<<SQL
 		SELECT g.id AS 'id_genre', g.nom_genre AS 'nom_genre'
 		FROM Genre AS g
+		ORDER BY g.nom_genre
 SQL
 		);
 	$req->execute();

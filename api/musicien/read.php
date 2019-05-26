@@ -20,6 +20,7 @@ function selectAllMusicians($conn)
 		LEFT JOIN Genre AS g ON g.id = a.id_genre
 		LEFT JOIN Pratique AS p ON p.id_musicien = mu.id
 		LEFT JOIN Instrument AS i ON i.id = p.id_instrument
+		ORDER BY mu.nom_musicien, mu.prenom_musicien
 SQL
 		);
 
@@ -53,10 +54,12 @@ SQL
 		}
 
 		//ville
-		$resultat[$id]['ville']['id'] =  intval($musicien['id_ville']);
-		$resultat[$id]['ville']['nom'] =  $musicien['nom_ville'];
-
-
+		if( !isset(	$resultat[$id]['ville']) )
+		{
+			$resultat[$id]['ville']['id'] =  intval($musicien['id_ville']);
+			$resultat[$id]['ville']['nom'] =  $musicien['nom_ville'];
+		}
+		
 		//genres
 		if( !isElement( intval($musicien['id_genre']), $resultat[$id]['genres'], 'id' ) )
 		{
@@ -69,16 +72,31 @@ SQL
 		//instruments
 		if( !isElement( intval($musicien['id_instrument']), $resultat[$id]['instruments'], 'id' ) )
 		{
-			$resultat[$id]['instruments'][(int)$nbInstruments[$id]]['id'] = intval($musicien['id_instrument']);
-			$resultat[$id]['instruments'][(int)$nbInstruments[$id]]['nom'] = $musicien['nom_instrument'];
-			$resultat[$id]['instruments'][(int)$nbInstruments[$id]]['annee_debut'] = $musicien['annee_debut'];
-			$resultat[$id]['instruments'][(int)$nbInstruments[$id]]['id_pratique'] = intval($musicien['id_pratique']);
+			$resultat[$id]['instruments'][$nbInstruments[$id]]['id'] = intval($musicien['id_instrument']);
+			$resultat[$id]['instruments'][$nbInstruments[$id]]['nom'] = $musicien['nom_instrument'];
+			$resultat[$id]['instruments'][$nbInstruments[$id]]['annee_debut'] = $musicien['annee_debut'];
+			$resultat[$id]['instruments'][$nbInstruments[$id]]['id_pratique'] = intval($musicien['id_pratique']);
 			$nbInstruments[$id] += 1;
 
 		}
 	}
 	$resultat['nombre'] = $nbMusiciens;
+	// TRI PAR LES NOMS, PRÉNOMS
+	// JE SAIS PASSSS
 	return $resultat;
+}
+
+function arraySort_multi($vecteur, $champ, $clefId, $clefNom, $clefPrenom)
+{
+	$vecteurTri = array();
+	$champTemp = 'passageId';
+	foreach ($vecteur as $id => $valeur) 
+	{
+		$nouvelId = $vecteur[$id][$champ][$clefId];
+		$vecteurTri[$nouvelId][$champ] = $vecteur[$id][$champ][$clefNom] + $vecteur[$id][$champ][$clefPrenom];
+		$vecteurTri[$nouvelId][$champTemp] =  $id;
+	}
+	array
 }
 
 
