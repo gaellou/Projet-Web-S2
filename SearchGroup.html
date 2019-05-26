@@ -16,25 +16,37 @@
 	<div></div>
 >>>>>>> master
 	<div>
-		<label id='TxtlstName"' for="name" class="textForm"></label>
-			<input type="text" id="search_lastname"  placeholder='Nom' class='TextInput'  ></div>
-			<div>
-		<label id='TxtGenre' for="name" class="textForm"></label>
-
-			<input type="text" id="search_genre[]" placeholder="Genre" class='TextInput'  > </div>
-	<div>
-		<label id ='TxtLoca' for="name" class="textForm"></label>
-
-				<input type="text" id="search_town" placeholder="Localisation" class='TextInput'  ></div>
-
-		<button id="button-search">Search</button>
+	<form id="form-groupe">
+		<ul>
+			<li>
+				<span><label id='TxtlstName"' for="name" class="textForm"></label></span>
+				<input type="text" id="search_name"  name ="nom" placeholder='Nom' class='TextInput'>
+			</li>
+			<li>Genre :
+				<select id="list-genre" name='genre'>
+					<option value="vide">--Sélectionnez un genre--</option>
+				</select>
+			</li>
+			<li>			
+				<span><label id='TxtMusicien' for="name" class="textForm">Musicien(s) :</label></span>
+					<ul id="list-musicien">
+						
+					</ul>
+			</li>
+			<li>			
+				<span><label id='TxtInstrument' for="name" class="textForm">Instrument(s) :</label></span>
+					<ul id="list-instrument">
+						
+					</ul>
+			</li>
+		</ul>
+		<button id="button-search">Rechercher</button>
+	</form>
 	</div>
 
-
-
-	<div id='res_div'> <h3>Résultats : </h3> </div>
-
-
+	<div id='res_div'> <h3>Résultats : </h3> <div id ="resultat"> </div></div>
+	<script src='js/groupe/search.js'></script>
+	
 </body>
 
 
