@@ -13,29 +13,30 @@
 	<div id = 'ResearchMusician'> <h2 id='TxtSearch'> Recherche : </h2>
 	<div></div>
 
-		<div>
-		<label id='TxtlstName"' for="name" class="textForm"></label>
-			<input type="text" id="search_lastname" placeholder="Groupe" class='TextInput'  ></div>
-			<div>
-		<label id='TxtlstName"' for="name" class="textForm"></label>
-			<input type="text" id="search_lastname" placeholder="Salle" class='TextInput'  ></div>
-		<div>
-		<label id='TxtGenre' for="name" class="textForm"></label>
-
-			<input type="text" id="search_genre[]" placeholder="Genre" class='TextInput'  ></div>
-	<div>
-		<label id ='TxtLoca' for="name" class="textForm"></label>
-
-				<input type="text" id="search_town" placeholder="Localisation" class='TextInput'  ></div>
-				<div>
-	<label id='TxtDate' for='name' classe="textForm"></label>
-		<input type="date" placeholder="Date" name="SignIn_date"></div>
-
-
-		<button id="button-search">Search</button>
+	<form id="form-concert">
+		<ul>
+			<li>
+				<span><label id = 'DateApres'for="input-date">Après : </label></span>
+				<input type="date" name="dateApres" id='input-date'>
+			</li>
+			<li>
+				<span><label id = 'DateAvant'for="input-date">Avant : </label></span>
+				<input type="date" name="dateAvant" id='input-date'>
+			</li>
+			<li>Salle :
+					<select id="list-salle" name='salle'>
+						<option value="vide">--Sélectionnez une salle--</option>
+					</select>
+			</li>
+			<li>Groupe :
+					<select id="list-groupe" name='groupe'>
+						<option value="vide">--Sélectionnez un groupe--</option>
+					</select>
+			</li>
+		</ul>
+		<button id="button-search">Rechercher</button>
+	</form>
 	</div>
-
-
 
 	<div id='res_div'> <h2>Résultats : </h2> </div>
 </div>
