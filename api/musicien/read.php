@@ -15,11 +15,11 @@ function selectAllMusicians($conn)
 			 i.id AS 'id_instrument', i.nom_instrument AS 'nom_instrument',
 			 p.id AS 'id_pratique', p.annee_debut AS 'annee_debut'
 		FROM Musicien AS mu
-		INNER JOIN Ville AS v ON v.id = mu.id_ville
-		INNER JOIN Aime AS a ON a.id_musicien = mu.id
-		INNER JOIN Genre AS g ON g.id = a.id_genre
-		INNER JOIN Pratique AS p ON p.id_musicien = mu.id
-		INNER JOIN Instrument AS i ON i.id = p.id_instrument
+		LEFT JOIN Ville AS v ON v.id = mu.id_ville
+		LEFT JOIN Aime AS a ON a.id_musicien = mu.id
+		LEFT JOIN Genre AS g ON g.id = a.id_genre
+		LEFT JOIN Pratique AS p ON p.id_musicien = mu.id
+		LEFT JOIN Instrument AS i ON i.id = p.id_instrument
 SQL
 		);
 

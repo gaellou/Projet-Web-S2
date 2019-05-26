@@ -14,7 +14,7 @@ function selectAllBands($conn)
 			m.id AS 'id_mu', m.nom_musicien AS 'nom_mu', m.prenom_musicien AS 'prenom_mu',
 			i.id AS 'id_instrument', i.nom_instrument AS 'nom_instrument'
 		FROM Groupe AS gr
-		INNER JOIN Genre AS g ON g.id = gr.id_genre
+		LEFT JOIN Genre AS g ON g.id = gr.id_genre
 		LEFT JOIN Membre AS mb ON mb.id_groupe = gr.id
 		LEFT JOIN Pratique AS p ON p.id = mb.id_pratique
 		LEFT JOIN Musicien AS m ON m.id = p.id_musicien

@@ -18,7 +18,7 @@ SQL
 	$nbVilles = 0;
 	while( ($ville = $req->fetch()) !== false )
 	{
-		$resultat[$nbVilles]['ville']['id'] = $ville['id_ville'];
+		$resultat[$nbVilles]['ville']['id'] = intval($ville['id_ville']);
 
 		$resultat[$nbVilles]['ville']['nom'] = $ville['nom_ville'];
 		$resultat[$nbVilles]['ville']['code_postal'] = intval($ville['code_postal']);
