@@ -156,7 +156,7 @@ document.getElementById('button-search').onclick = event => {
 	if(form.genre.value!="vide"){
 		for(var i=0; i<tabNomsGenres.length; i++){
 			if(tabNomsGenres[i]==form.genre.value){
-				stringIdVille = tabIdGenres[i];
+				stringIdGenre = tabIdGenres[i];
 				break;
 			}
 		}
@@ -212,7 +212,7 @@ document.getElementById('button-search').onclick = event => {
 	let params ={};
 
 	if(form.nom.value) params['nom'] = form.nom.value;
-	if(stringIdGenre !="") params['genres'] = stringIdGenre;
+	if(stringIdGenre !="") params['genre'] = stringIdGenre;
 	if(stringIdMusiciens !="") params['musiciens'] = stringIdMusiciens;
 	if(stringIdInstruments !="") params['instruments'] = stringIdInstruments;
 	
