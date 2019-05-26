@@ -266,10 +266,29 @@ document.getElementById('button-search').onclick = event => {
 			if(data.nombre == 0)
 				resultat.innerHTML = "Il n'y a aucun musicien qui correspond à votre recherche.";
 			
-			else if(data.nombre == 1)
-				resultat.innerHTML = "L'unique musicien correspondant à votre recherche est : <br><br> - "+data[0].musicien.prenom+" "+data[0].musicien.nom+" ("+data[0].musicien.id+")" ;
-				
-			
+			else if(data.nombre == 1){
+				resultat.innerHTML = "L'unique musicien correspondant à votre recherche est : <br><br> - "+data[0].musicien.prenom+" "+data[0].musicien.nom+"<br>" ;
+				if(data[0].genres.length == 0) resultat.innerHTML += "&nbsp &nbsp (Aucun genre précisé)";
+				 	else{
+				 		/* On met un s ou non selon le nombre de genre*/
+				 		(data[0].genres.length<2) ? resultat.innerHTML += "&nbsp &nbsp	Genre :" : resultat.innerHTML += "&nbsp &nbsp	Genres :";
+				 		for(var j=0; j<data[0].genres.length; j++){
+				 			resultat.innerHTML += "<br>&nbsp &nbsp &nbsp - " + data[0].genres[j].nom;
+				 			console.log("genres : ",data[0].genres);
+				 		}
+				 	}
+				 	resultat.innerHTML += "<br>";
+					
+					if(data[0].instruments.length == 0) resultat.innerHTML += "&nbsp &nbsp (Aucun instrument précisé)";
+					else{
+				 		/* On met un s ou non selon le nombre d'instruments*/
+				 		(data[0].instruments.length<2) ? resultat.innerHTML += "&nbsp &nbsp	Instrument :" : resultat.innerHTML += "&nbsp &nbsp	Instruments :";
+				 		for(var j=0; j<data[0].instruments.length; j++){
+				 			resultat.innerHTML += "<br>&nbsp &nbsp &nbsp - " + data[0].instruments[j].nom;
+				 			console.log("genres : ",data[0].instruments);
+				 		}
+				 	}
+			}
 			else{
 				resultat.innerHTML = "Les musiciens correspondants à votre recherche sont : <br><br>";
 			
