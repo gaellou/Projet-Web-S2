@@ -253,7 +253,7 @@ document.getElementById('button-search').onclick = event => {
 					resultat.innerHTML = "Les groupes correspondants à votre recherche sont : <br><br> - ";
 				for(var h=0; h<data.nombre; h++){
 					if(data[h]){
-						resultat.innerHTML += '"'+data[h].groupe.nom+'"'+", composé ";
+						resultat.innerHTML += '"'+data[h].groupe.nom+'"'+"  ( "+ data[h].genre.nom +" )"+", composé ";
 						console.log("data[h]",data[h]);
 						if(data[h].membres.length==1) resultat.innerHTML += "du sublime <br>";
 						else if(data[h].membres.length > 1) resultat.innerHTML += "des sublimes <br><br>";
