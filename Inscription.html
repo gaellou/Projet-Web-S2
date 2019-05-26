@@ -5,9 +5,22 @@
 	<title>Inscription</title>
 	<link rel="stylesheet"  href="css/style_SignIn.css">
 </head>
-<a href="index.html" id='bouton_accueil' style='color : white'>Accueil</a>
-<body>
-		
+<a href="index.html" id='bouton_accueil0' style='color : white'>Accueil</a>
+<body> 
+	<div id="masque-opaque" style= 'display : none'>
+		<div class="popup">
+		<p id="result"></p>
+		<p id="soluce"></p>
+		<a href="index.html">
+		<button id="bouton_accueil" class="bold" type="button">Revenir à l'accueil</button>
+		<!--<img id="croix" alt="picture of cross" src="img/checkmark.png"/>--!>
+		</a>
+		<a href="Inscription.html">
+		<button id="bouton_inscription" class="bold" type="button">J'inscris quelqu'un d'autre !</button>
+		</a>
+		</div>
+	</div>
+	
 	<div id='SignInForm'>
 	<div></div>
 	<h1 id='txtSignIn'> Inscription </h1>
@@ -54,6 +67,6 @@
 	<button id="button-signIn">C'est parti !</button>
 
 		</div>
-	<script src='js/inscription.js'></script>
+	<script src='js/musicien/inscription.js'></script>
 </body>
 </html>
