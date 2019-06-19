@@ -15,10 +15,10 @@ SQL
 	$req->execute();
 
 
-	$nbGenres = 0;
+	$nbInstruments = 0;
 	while( ($instrument = $req->fetch()) !== false )
 	{
-		$resultat[$nbInstruments]['instrument']['id'] = $instrument['id_instrument'];
+		$resultat[$nbInstruments]['instrument']['id'] = intval($instrument['id_instrument']);
 		$resultat[$nbInstruments]['instrument']['nom'] = $instrument['nom_instrument'];
 		$nbInstruments++;
 	}

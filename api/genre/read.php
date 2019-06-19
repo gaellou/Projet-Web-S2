@@ -18,7 +18,7 @@ SQL
 	$nbGenres = 0;
 	while( ($genre = $req->fetch()) !== false )
 	{
-		$resultat[$nbGenres]['genre']['id'] = $genre['id_genre'];
+		$resultat[$nbGenres]['genre']['id'] = intval($genre['id_genre']);
 		$resultat[$nbGenres]['genre']['nom'] = $genre['nom_genre'];
 		$nbGenres++;
 	}

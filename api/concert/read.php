@@ -26,7 +26,7 @@ SQL
 	$nbConcerts = 0;
 	while( ($concert = $req->fetch()) !== false )
 	{
-		$resultat[$nbConcerts]['concert']['id'] = $concert['id_concert'];
+		$resultat[$nbConcerts]['concert']['id'] = intval($concert['id_concert']);
 		$resultat[$nbConcerts]['concert']['date_concert'] = $concert['date_concert'];
 
 		$resultat[$nbConcerts]['groupe']['id'] = intval($concert['id_groupe']);

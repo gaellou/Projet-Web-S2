@@ -21,7 +21,7 @@ SQL
 	$nbSalles = 0;
 	while( ($salle = $req->fetch()) !== false )
 	{
-		$resultat[$nbSalles]['salle']['id'] = $salle['id_salle'];
+		$resultat[$nbSalles]['salle']['id'] = intval($salle['id_salle']);
 
 		$resultat[$nbSalles]['salle']['nom'] = $salle['nom_salle'];
 		$resultat[$nbSalles]['salle']['capacite'] = intval($salle['capacite']);
